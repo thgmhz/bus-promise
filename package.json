@@ -2,9 +2,9 @@
   "name": "spbus-promise",
   "author": "Thiago M. Medeiros",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "main": "build/index.js",
   "scripts": {
-    "build-node": "babel src --out-dir dist",
+    "build-node": "babel src --out-dir build",
     "lint": "eslint --config ./.eslintrc src/ test/",
     "test": "yarn run test-unit && yarn run test-integration",
     "test-unit": "./node_modules/ava/cli.js 'test/unit/**/*.test.js'",
