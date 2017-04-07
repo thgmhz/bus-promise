@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint --config ./.eslintrc src/ test/",
-    "test-unit": "./node_modules/ava/cli.js 'test/unit/**/*.js'"
+    "test-unit": "./node_modules/ava/cli.js 'test/unit/**/*.test.js'"
   },
   "repository": {
     "type": "git",
