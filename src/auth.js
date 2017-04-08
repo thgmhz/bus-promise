@@ -11,7 +11,7 @@ const handleResponse = res => {
 }
 
 export default token => {
-  if (!token) throw Error('O token é obrigatório para autenticação.')
+  if (!token) handleError('O token é obrigatório para autenticação.')
 
   const url = `${api.endpoint}${api.auth}?token=${token}`
   const options = {
