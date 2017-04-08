@@ -5,6 +5,6 @@ test('spbus should has the auth method', t => {
   t.is(typeof spbus.auth, 'function')
 })
 
-test('should return error when receive no token', t => {
+test('should return error when send no token', t => {
   t.throws(spbus.auth)
 })
