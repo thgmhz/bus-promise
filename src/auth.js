@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import { api } from './config'
+import { API } from './constants'
 
 const handleError = err => {
   throw Error(err)
@@ -13,7 +13,7 @@ const handleResponse = res => {
 export default token => {
   if (!token) handleError('O token é obrigatório para autenticação.')
 
-  const url = `${api.endpoint}${api.auth}?token=${token}`
+  const url = `${API.endpoint}${API.auth.route}?${API.auth.param}=${token}`
   const options = {
     method: 'POST',
     headers: {
