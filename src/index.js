@@ -1,8 +1,5 @@
-import fetch from 'isomorphic-fetch'
-import config from './config'
+import auth from './auth'
 
-export default {
-  auth (token) {
-    return fetch(`${config.endpoint}${config.auth}?token=${token}`, { method: 'POST' })
-  }
+module.exports = {
+  auth
 }
