@@ -24,3 +24,14 @@ test('when find paradas should return a populated array', async t => {
   t.true(response.length > 0)
   t.true(response instanceof Array)
 })
+
+test('when find paradasPorLinha should return a populated array', async t => {
+  const auth = await sptrans.auth(TOKEN)
+  const response = await sptrans.find({
+    auth: auth.credentials,
+    type: 'paradasPorLinha',
+    code: 34041
+  })
+  t.true(response.length > 0)
+  t.true(response instanceof Array)
+})

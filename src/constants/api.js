@@ -6,10 +6,17 @@ export default {
   },
   linhas: {
     route: '/linha/buscar',
-    param: 'termosBusca'
+    param: 'termosBusca',
+    libParam: 'term'
   },
   paradas: {
     route: '/parada/buscar',
-    param: 'termosBusca'
+    param: 'termosBusca',
+    libParam: 'term'
+  },
+  paradasPorLinha: {
+    route: '/parada/buscarParadasPorLinha',
+    param: 'codigoLinha',
+    libParam: 'code'
   }
 }
