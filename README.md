@@ -12,3 +12,24 @@
 <p align="center">
   Busca informações em tempo real da frota de ônibus da SPTrans na cidade de São Paulo.
 </p>
+
+# Como utilizar
+
+
+### Instalação
+
+** Projeto em desenvolvimento
+
+### Token
+
+A API da SPTrans exige autenticação com um `token` que você pode obter ao  se cadastrar pelo link: http://www.sptrans.com.br/desenvolvedores/.
+
+### Autenticação
+O método `auth()` recebe o `token` e retorna uma `Promise` com as `credentials`.
+
+``` js
+import sptrans from 'sptrans-promise'
+
+auth('SEU_TOKEN_AQUI').then(console.log)
+```
+
