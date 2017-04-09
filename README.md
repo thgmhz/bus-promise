@@ -30,6 +30,7 @@ O método `auth()` recebe o `token` e retorna uma `Promise` com as `credentials`
 ``` js
 import sptrans from 'sptrans-promise'
 
-sptrans.auth('SEU_TOKEN_AQUI').then(console.log)
+sptrans.auth('SEU_TOKEN_AQUI')
+  .then(console.log)
 ```
 
