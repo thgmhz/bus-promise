@@ -5,21 +5,22 @@ const handleError = err => {
   throw new Error(err)
 }
 
-const handleResponse = res => {
+const validateHttpStatus = res => {
   if (res.status !== 200) handleError('Erro ao se conectar com o serviço da SPTrans.')
-
-  const credentials = res.headers['set-cookie'][0]
-
-  return {
-    response: res.data,
-    credentials
-  }
+  return res
 }
 
-const validateToken = token => {
-  if (!token) handleError('O token é obrigatório para autenticação.')
-  return token
+const checkIfHasToken = token =>
+  token || handleError('O token é obrigatório para autenticação.')
+
+const validateToken = res => {
+  if (!res.data) handleError('Token inválido.')
+  return res
 }
+
+const setCredentials = res => ({
+  credentials: res.headers['set-cookie'][0]
+})
 
 const fetchData = token => {
   const config = {
@@ -28,10 +29,13 @@ const fetchData = token => {
     params: { token }
   }
 
-  return axios(config).then(handleResponse)
+  return axios(config)
+    .then(validateHttpStatus)
+    .then(validateToken)
+    .then(setCredentials)
 }
 
 export default token =>
   Promise.resolve(token)
-    .then(validateToken)
+    .then(checkIfHasToken)
     .then(fetchData)
