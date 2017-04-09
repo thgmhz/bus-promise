@@ -7,5 +7,9 @@ export default {
   linhas: {
     route: '/linha/buscar',
     param: 'termosBusca'
+  },
+  paradas: {
+    route: '/parada/buscar',
+    param: 'termosBusca'
   }
 }

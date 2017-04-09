@@ -1,3 +1,4 @@
 export default [
-  'linhas'
+  'linhas',
+  'paradas'
 ]
