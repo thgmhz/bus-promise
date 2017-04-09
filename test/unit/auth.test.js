@@ -7,6 +7,6 @@ test('sptrans should has the auth method', t => {
 
 test('should return error when send no token', async t => {
   await sptrans.auth().catch(err => {
-    t.is(err.message, 'O token é obrigatório para autenticação.')
+    t.true(err instanceof Error)
   })
 })

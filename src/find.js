@@ -10,10 +10,10 @@ const handleResponse = res => res.data
 const validateParams = params => {
   if (!params) handleError('O método "find" deve receber parâmetros.')
 
-  if (!ALLOWED_TYPES.includes(params.type)) handleError('Parâmetro "type" não encontrado.')
+  if (!ALLOWED_TYPES.includes(params.type)) handleError('Parâmetro "type" não permitido.')
 
   if (params.type === 'linhas' || params.type === 'paradas') {
-    if (!params.term) handleError('O parâmetro "term" não pode ser nulo.')
+    if (!params.term) handleError('O parâmetro "term" é obrigatório para este "type".')
   }
 
   return params
