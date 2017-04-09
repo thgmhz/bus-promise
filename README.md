@@ -13,7 +13,7 @@
   Busca informações em tempo real da frota de ônibus da SPTrans na cidade de São Paulo.
 </p>
 
-# Como utilizar
+## Como utilizar
 
 
 ### Instalação
