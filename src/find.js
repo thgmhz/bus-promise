@@ -12,30 +12,33 @@ const validateHttpStatus = res => {
 
 const handleResponse = res => res.data
 
-const validateParams = params => {
-  if (!params) {
-    handleError('O método "find" deve receber parâmetros.')
-  }
+const hasParams = params =>
+  params || handleError('O método "find" deve receber parâmetros.')
 
-  if (!ALLOWED_TYPES.includes(params.type)) {
-    handleError('Parâmetro "type" não permitido.')
-  }
-
-  if (params.type === 'linhas' || params.type === 'paradas') {
-    if (!params.term) handleError('O parâmetro "term" é obrigatório para este "type".')
-  }
-
+const hasAllowedType = params => {
+  ALLOWED_TYPES.includes(params.type) || handleError('Parâmetro "type" não permitido.')
   return params
 }
 
+const hasTerm = params => {
+  const updatedParams = params
+
+  if (params.type === 'linhas' || params.type === 'paradas') {
+    if (!params.term) handleError('O parâmetro "term" é obrigatório para este "type".')
+    updatedParams.value = params.term
+  }
+
+  return updatedParams
+}
+
 const fetchData = params => {
-  const { auth, type, term } = params
+  const { auth, type, value } = params
 
   const config = {
     method: 'get',
     url: API.endpoint + API[type].route,
     params: {
-      [API[type].param]: term
+      [API[type].param]: value
     },
     headers: {
       Cookie: auth
@@ -49,5 +52,7 @@ const fetchData = params => {
 
 export default params =>
   Promise.resolve(params)
-    .then(validateParams)
+    .then(hasParams)
+    .then(hasAllowedType)
+    .then(hasTerm)
     .then(fetchData)
