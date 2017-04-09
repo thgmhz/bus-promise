@@ -4,5 +4,8 @@ export default {
     route: '/login/autenticar',
     param: 'token'
   },
-  linhas: ''
+  linhas: {
+    route: '/linha/buscar',
+    param: 'termosBusca'
+  }
 }

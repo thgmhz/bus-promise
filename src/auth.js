@@ -1,27 +1,37 @@
-import fetch from 'isomorphic-fetch'
+import axios from 'axios'
 import { API } from './constants'
 
 const handleError = err => {
-  throw Error(err)
+  throw new Error(err)
 }
 
 const handleResponse = res => {
-  if (!res.ok) handleError('Erro ao se conectar com o serviço da SPTrans.')
-  return res.json()
+  if (res.status !== 200) handleError('Erro ao se conectar com o serviço da SPTrans.')
+
+  const credentials = res.headers['set-cookie'][0]
+
+  return {
+    response: res.data,
+    credentials
+  }
 }
 
-export default token => {
+const validateToken = token => {
   if (!token) handleError('O token é obrigatório para autenticação.')
+  return token
+}
 
-  const url = `${API.endpoint}${API.auth.route}?${API.auth.param}=${token}`
-  const options = {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json;charset=utf-8'
-    }
+const fetchData = token => {
+  const config = {
+    method: 'post',
+    url: API.endpoint + API.auth.route,
+    params: { token }
   }
 
-  return fetch(url, options)
-    .then(handleResponse)
-    .catch(handleError)
+  return axios(config).then(handleResponse)
 }
+
+export default token =>
+  Promise.resolve(token)
+    .then(validateToken)
+    .then(fetchData)
