@@ -10,12 +10,12 @@ const checkIfHasToken = token =>
 
 const fetchData = token => {
   const validateHttpStatus = res => {
-    if (res.status !== 200) handleError('Erro ao se conectar com o serviço da SPTrans.')
+    res.status === 200 || handleError('Erro ao se conectar com o serviço da SPTrans.')
     return res
   }
 
   const validateToken = res => {
-    if (!res.data) handleError('Token inválido.')
+    res.data || handleError('Token inválido.')
     return res
   }
 
