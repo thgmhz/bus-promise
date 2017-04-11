@@ -6,16 +6,16 @@ const handleError = err => {
 }
 
 const hasParams = params =>
-  params || handleError('O método "find" deve receber parâmetros.')
+  params || handleError('O método find() deve receber parâmetros.')
 
 const hasAllowedType = params => {
-  ALLOWED_TYPES.includes(params.type) || handleError('O parâmetro "type" está errado.')
+  ALLOWED_TYPES.includes(params.type) || handleError(`O valor "${params.type}" do parâmetro type está errado.`)
   return params
 }
 
 const hasLibParamNameForThisType = params => {
   const libParamName = API[params.type].libParamName
-  params[libParamName] || handleError(`O parâmetro "${libParamName}" é obrigatório para este "type".`)
+  params[libParamName] || handleError(`O parâmetro "${libParamName}" é obrigatório para o type "${params.type}".`)
 
   const updatedParams = params
   updatedParams.value = params[libParamName]
