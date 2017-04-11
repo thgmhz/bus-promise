@@ -19,9 +19,7 @@ const fetchData = token => {
     return res
   }
 
-  const setCredentials = res => ({
-    credentials: res.headers['set-cookie'][0]
-  })
+  const setCredentials = res => res.headers['set-cookie'][0]
 
   const config = {
     method: 'post',
