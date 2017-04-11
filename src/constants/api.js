@@ -19,7 +19,7 @@ export default {
     param: 'codigoLinha',
     proxyParam: 'code'
   },
-  corredor: {
+  corredores: {
     route: '/corredor'
   }
 }

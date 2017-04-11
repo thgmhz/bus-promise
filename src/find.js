@@ -15,8 +15,8 @@ const hasAllowedType = options => {
 
 const hasProxyParamForThisType = options => {
   const apiType = API[options.type]
-  if (!apiType.param) return options
-  
+  if (!('param' in apiType)) return options
+
   const proxyParam = apiType.proxyParam
   options[proxyParam] || handleError(`O "${proxyParam}" é obrigatório para este "type".`)
 
