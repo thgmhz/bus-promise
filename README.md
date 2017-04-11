@@ -58,9 +58,6 @@ Aceita o nome da linha, número ou letreiro. O valor deve ser passado pelo parâ
 ``` js
 import sptrans from 'sptrans-promise'
 
-sptrans.auth('SEU_TOKEN_AQUI')
-  .then(encontrarLinhas)
-
 const encontrarLinhas = auth => {
   sptrans.find({
     auth,
@@ -68,6 +65,9 @@ const encontrarLinhas = auth => {
     term: 'Term. Lapa'
   }).then(console.log)
 }
+
+sptrans.auth('SEU_TOKEN_AQUI')
+  .then(encontrarLinhas)
 ```
 O parâmetro `term` também aceita um `array` de `strings` para buscar várias linhas ao mesmo tempo. Exemplo:
 
