@@ -73,7 +73,7 @@ test('find corredores should return a populated array', async t => {
   const auth = await sptrans.auth(TOKEN)
   const response = await sptrans.find({
     auth,
-    type: 'corredor'
+    type: 'corredores'
   })
   t.true(response.length > 0)
   t.true(response instanceof Array)
