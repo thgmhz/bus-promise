@@ -1,5 +1,6 @@
 export default [
   'linhas',
   'paradas',
-  'paradasPorLinha'
+  'paradasPorLinha',
+  'corredor'
 ]
