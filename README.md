@@ -13,7 +13,7 @@
   Busca informações em tempo real da frota de ônibus da SPTrans na cidade de São Paulo.
 </p>
 
----
+<br><br>
 
 ## Sobre
 O **SPTrans Promise** é uma biblioteca *Javascript (client-side e server-side)* feita para facilitar o acesso a API da SPTrans que disponibiliza dados em tempo real da frota de ônibus da cidade de São Paulo.
@@ -31,7 +31,7 @@ Acesse nosso guia para saber como contribuir com a biblioteca, [clique aqui](htt
 
 A API da SPTrans exige autenticação com um `token` que você pode obter ao  se cadastrar pelo link: http://www.sptrans.com.br/desenvolvedores/.
 
-### Autenticação
+## Autenticação
 O método `auth()` recebe um `token` e retorna uma `Promise` com as `credentials`.
 
 ``` js
@@ -41,7 +41,7 @@ sptrans.auth('SEU_TOKEN_AQUI')
   .then(console.log)
 ```
 
-### O método find()
+## O método find()
 
 Este é o principal método da biblioteca, você deve usá-lo para realizar buscas pelos seguintes tipos de dados:
 
