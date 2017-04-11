@@ -15,7 +15,7 @@ const hasAllowedType = params => {
 
 const hasLibParamNameForThisType = params => {
   const libParamName = API[params.type].libParamName
-  params[libParamName] || handleError(`O parâmetro "${libParamName}" é obrigatório para o "type".`)
+  params[libParamName] || handleError(`O parâmetro "${libParamName}" é obrigatório para este "type".`)
 
   const updatedParams = params
   updatedParams.value = params[libParamName]
