@@ -7,16 +7,19 @@ export default {
   linhas: {
     route: '/linha/buscar',
     param: 'termosBusca',
-    libParamName: 'term'
+    proxyParam: 'term'
   },
   paradas: {
     route: '/parada/buscar',
     param: 'termosBusca',
-    libParamName: 'term'
+    proxyParam: 'term'
   },
   paradasPorLinha: {
     route: '/parada/buscarParadasPorLinha',
     param: 'codigoLinha',
-    libParamName: 'code'
+    proxyParam: 'code'
+  },
+  corredor: {
+    route: '/corredor'
   }
 }

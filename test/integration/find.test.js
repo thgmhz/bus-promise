@@ -68,3 +68,13 @@ test('find paradasPorLinha passing an array of integers should return a populate
   t.true(response.length === 3)
   t.true(response instanceof Array)
 })
+
+test('find corredores should return a populated array', async t => {
+  const auth = await sptrans.auth(TOKEN)
+  const response = await sptrans.find({
+    auth,
+    type: 'corredor'
+  })
+  t.true(response.length > 0)
+  t.true(response instanceof Array)
+})
