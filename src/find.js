@@ -13,12 +13,12 @@ const hasAllowedType = params => {
   return params
 }
 
-const hasLibParamForThisType = params => {
-  const libParam = API[params.type].libParam
-  params[libParam] || handleError(`O parâmetro "${libParam}" é obrigatório para este "type".`)
+const hasLibParamNameForThisType = params => {
+  const libParamName = API[params.type].libParamName
+  params[libParamName] || handleError(`O parâmetro "${libParamName}" é obrigatório para o "type".`)
 
   const updatedParams = params
-  updatedParams.value = params[libParam]
+  updatedParams.value = params[libParamName]
 
   return updatedParams
 }
@@ -33,18 +33,28 @@ const fetchData = params => {
 
   const handleResponse = res => res.data
 
-  const config = {
-    method: 'get',
-    url: API.endpoint + API[type].route,
-    params: {
-      [API[type].param]: value
-    },
-    headers: {
-      Cookie: auth
+  const buildPromise = paramValue => {
+    const config = {
+      method: 'get',
+      url: API.endpoint + API[type].route,
+      params: {
+        [API[type].param]: paramValue
+      },
+      headers: {
+        Cookie: auth
+      }
     }
+    return axios(config)
   }
 
-  return axios(config)
+  if (value instanceof Array) {
+    const promises = value.map(buildPromise)
+    return Promise.all(promises)
+      .then(res => res.map(validateHttpStatus))
+      .then(res => res.map(handleResponse))
+  }
+
+  return buildPromise(value)
     .then(validateHttpStatus)
     .then(handleResponse)
 }
@@ -53,5 +63,5 @@ export default params =>
   Promise.resolve(params)
     .then(hasParams)
     .then(hasAllowedType)
-    .then(hasLibParamForThisType)
+    .then(hasLibParamNameForThisType)
     .then(fetchData)
