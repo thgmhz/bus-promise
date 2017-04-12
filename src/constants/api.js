@@ -21,5 +21,10 @@ export default {
   },
   corredores: {
     route: '/corredor'
+  },
+  paradasPorCorredor: {
+    route: '/parada/buscarParadasPorCorredor',
+    param: 'codigoCorredor',
+    proxyParam: 'code'
   }
 }
