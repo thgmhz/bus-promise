@@ -5,7 +5,7 @@ test('sptrans should has the auth method', t => {
   t.is(typeof sptrans.auth, 'function')
 })
 
-test('should return error when send no token', async t => {
+test('when send no token should return error', async t => {
   await sptrans.auth().catch(err => {
     t.true(err instanceof Error)
   })
