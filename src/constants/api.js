@@ -26,5 +26,10 @@ export default {
     route: '/parada/buscarParadasPorCorredor',
     param: 'codigoCorredor',
     proxyParam: 'code'
+  },
+  posicaoVeiculos: {
+    route: '/posicao',
+    param: 'codigoLinha',
+    proxyParam: 'code'
   }
 }

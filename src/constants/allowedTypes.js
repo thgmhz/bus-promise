@@ -3,5 +3,6 @@ export default [
   'paradas',
   'paradasPorLinha',
   'corredores',
-  'paradasPorCorredor'
+  'paradasPorCorredor',
+  'posicaoVeiculos'
 ]

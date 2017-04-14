@@ -176,3 +176,35 @@ test('when find "paradasPorCorredor" as array should return the expected keys', 
   t.deepEqual(responseKeys, expectedKeys)
   t.true(response instanceof Array)
 })
+
+test('when find "posicaoVeiculos" should return the expected keys', async t => {
+  const auth = await sptrans.auth(TOKEN)
+  const response = await sptrans.find({
+    auth,
+    type: 'posicaoVeiculos',
+    code: 34041
+  })
+  const responseKeys = Object.keys(response)
+  const expectedKeys = [
+    'hr',
+    'vs'
+  ]
+  t.deepEqual(responseKeys, expectedKeys)
+  t.true(response instanceof Object)
+})
+
+test('when find "posicaoVeiculos" should return the expected keys', async t => {
+  const auth = await sptrans.auth(TOKEN)
+  const response = await sptrans.find({
+    auth,
+    type: 'posicaoVeiculos',
+    code: [34041, 34042]
+  })
+  const responseKeys = Object.keys(response[0])
+  const expectedKeys = [
+    'hr',
+    'vs'
+  ]
+  t.deepEqual(responseKeys, expectedKeys)
+  t.true(response instanceof Array)
+})
