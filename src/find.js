@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { API, ALLOWED_TYPES } from './constants'
+import { API } from './constants'
 
 const handleError = err => {
   throw new Error(err)
@@ -8,8 +8,8 @@ const handleError = err => {
 const hasOptions = options =>
   options || handleError('O método "find" deve receber um objeto com opções.')
 
-const hasAllowedType = options => {
-  ALLOWED_TYPES.includes(options.type) || handleError(`O "type" "${options.type}" não existe.`)
+const isAllowedType = options => {
+  options.type in API || handleError(`O "tipo" "${options.type}" não existe.`)
   return options
 }
 
@@ -73,6 +73,6 @@ const fetchData = options => {
 export default options =>
   Promise.resolve(options)
     .then(hasOptions)
-    .then(hasAllowedType)
+    .then(isAllowedType)
     .then(hasProxyParamForThisType)
     .then(fetchData)
