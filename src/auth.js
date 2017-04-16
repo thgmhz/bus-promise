@@ -37,3 +37,4 @@ export default token =>
   Promise.resolve(token)
     .then(checkIfHasToken)
     .then(fetchData)
+    .catch(handleError)
