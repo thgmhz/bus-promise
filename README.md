@@ -174,3 +174,57 @@ sptrans.find({
   codigoLinha: [34041, 34042]
 }).then(console.log)
 ```
+
+#### Previsão de chegada
+O tipo `previsaoChegada` retorna a previsão de chegada de cada veículo de uma determinada linha e de um determinado ponto de parada, além da localização exata de cada veículo que constar na cadeia de previsões.
+
+Aceita o código da parada e o código da linha. O valor deve ser passado pelos parâmetros `codigoParada` e `codigoLinha` como um `integer`:
+
+``` js
+sptrans.find({
+  auth,
+  tipo: 'previsaoChegada',
+  codigoParada: 260015039,
+  codigoLinha: 34041
+}).then(console.log)
+```
+#### Previsão da linha
+O tipo `previsaoLinha` retorna uma lista com a previsão de chegada de cada um dos veículos da linha informada em todos os pontos de parada aos quais que ela atende.
+
+Aceita o código da linha. O valor deve ser passado pelo parâmetro `codigoLinha` como um `integer` ou um `array` de `integers`:
+
+``` js
+//passando integer
+sptrans.find({
+  auth,
+  tipo: 'previsaoLinha',
+  codigoLinha: 34041
+}).then(console.log)
+
+//passando array
+sptrans.find({
+  auth,
+  tipo: 'previsaoLinha',
+  codigoLinha: [34041, 34042]
+}).then(console.log)
+```
+#### Previsão da parada
+O tipo `previsaoParada` retorna uma lista com a previsão de chegada dos veículos de cada uma das linhas que atendem ao ponto de parada informado.
+
+Aceita o código da parada. O valor deve ser passado pelo parâmetro `codigoParada` como um `integer` ou um `array` de `integers`:
+
+``` js
+//passando integer
+sptrans.find({
+  auth,
+  tipo: 'previsaoParada',
+  codigoParada: 260015039
+}).then(console.log)
+
+//passando array
+sptrans.find({
+  auth,
+  tipo: 'previsaoParada',
+  codigoParada: [260015039, 260015038]
+}).then(console.log)
+```

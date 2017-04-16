@@ -208,3 +208,84 @@ test('when find "posicaoVeiculos" should return the expected keys', async t => {
   t.deepEqual(responseKeys, expectedKeys)
   t.true(response instanceof Array)
 })
+
+test('when find "previsaoChegada" should return the expected keys', async t => {
+  const auth = await sptrans.auth(TOKEN)
+  const response = await sptrans.find({
+    auth,
+    tipo: 'previsaoChegada',
+    codigoParada: 260015039,
+    codigoLinha: 34041
+  })
+  const responseKeys = Object.keys(response)
+  const expectedKeys = [
+    'hr',
+    'p'
+  ]
+  t.deepEqual(responseKeys, expectedKeys)
+  t.true(response instanceof Object)
+})
+
+test('when find "previsaoLinha" as integer should return the expected keys', async t => {
+  const auth = await sptrans.auth(TOKEN)
+  const response = await sptrans.find({
+    auth,
+    tipo: 'previsaoLinha',
+    codigoLinha: 34041
+  })
+  const responseKeys = Object.keys(response)
+  const expectedKeys = [
+    'hr',
+    'ps'
+  ]
+  t.deepEqual(responseKeys, expectedKeys)
+  t.true(response instanceof Object)
+})
+
+test('when find "previsaoLinha" as array should return the expected keys', async t => {
+  const auth = await sptrans.auth(TOKEN)
+  const response = await sptrans.find({
+    auth,
+    tipo: 'previsaoLinha',
+    codigoLinha: [34041, 34042]
+  })
+  const responseKeys = Object.keys(response[0])
+  const expectedKeys = [
+    'hr',
+    'ps'
+  ]
+  t.deepEqual(responseKeys, expectedKeys)
+  t.true(response instanceof Object)
+})
+
+test('when find "previsaoParada" as integer should return the expected keys', async t => {
+  const auth = await sptrans.auth(TOKEN)
+  const response = await sptrans.find({
+    auth,
+    tipo: 'previsaoParada',
+    codigoParada: 260015039
+  })
+  const responseKeys = Object.keys(response)
+  const expectedKeys = [
+    'hr',
+    'p'
+  ]
+  t.deepEqual(responseKeys, expectedKeys)
+  t.true(response instanceof Object)
+})
+
+test('when find "previsaoParada" as array should return the expected keys', async t => {
+  const auth = await sptrans.auth(TOKEN)
+  const response = await sptrans.find({
+    auth,
+    tipo: 'previsaoParada',
+    codigoParada: [260015039, 260015038]
+  })
+  const responseKeys = Object.keys(response[0])
+  const expectedKeys = [
+    'hr',
+    'p'
+  ]
+  t.deepEqual(responseKeys, expectedKeys)
+  t.true(response instanceof Object)
+})

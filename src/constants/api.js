@@ -26,5 +26,17 @@ export default {
   posicaoVeiculos: {
     route: '/posicao',
     required: ['codigoLinha']
+  },
+  previsaoChegada: {
+    route: '/previsao',
+    required: ['codigoParada', 'codigoLinha']
+  },
+  previsaoLinha: {
+    route: '/previsao/linha',
+    required: ['codigoLinha']
+  },
+  previsaoParada: {
+    route: '/previsao/parada',
+    required: ['codigoParada']
   }
 }
