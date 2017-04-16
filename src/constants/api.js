@@ -2,34 +2,29 @@ export default {
   endpoint: 'http://api.olhovivo.sptrans.com.br/v0',
   auth: {
     route: '/login/autenticar',
-    param: 'token'
+    required: ['token']
   },
   linhas: {
     route: '/linha/buscar',
-    param: 'termosBusca',
-    proxyParam: 'term'
+    required: ['termosBusca']
   },
   paradas: {
     route: '/parada/buscar',
-    param: 'termosBusca',
-    proxyParam: 'term'
+    required: ['termosBusca']
   },
   paradasPorLinha: {
     route: '/parada/buscarParadasPorLinha',
-    param: 'codigoLinha',
-    proxyParam: 'code'
+    required: ['codigoLinha']
   },
   corredores: {
     route: '/corredor'
   },
   paradasPorCorredor: {
     route: '/parada/buscarParadasPorCorredor',
-    param: 'codigoCorredor',
-    proxyParam: 'code'
+    required: ['codigoCorredor']
   },
   posicaoVeiculos: {
     route: '/posicao',
-    param: 'codigoLinha',
-    proxyParam: 'code'
+    required: ['codigoLinha']
   }
 }

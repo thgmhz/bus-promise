@@ -23,58 +23,58 @@ test('when send a not allowed param should return error', async t => {
   const auth = sptrans.auth(TOKEN)
   await sptrans.find({
     auth,
-    type: 'not-allowed'
+    tipo: 'not-allowed'
   }).catch(err => {
     t.is(err.message, 'Error: O "tipo" "not-allowed" não existe.')
   })
 })
 
-test('when send no term for linhas should return error', async t => {
+test('when send no termosBusca for linhas should return error', async t => {
   const auth = sptrans.auth(TOKEN)
   await sptrans.find({
     auth,
-    type: 'linhas'
+    tipo: 'linhas'
   }).catch(err => {
-    t.is(err.message, 'Error: O parâmetro "term" é obrigatório para este "type".')
+    t.is(err.message, 'Error: Parâmetro(s) obrigatório(s): "termosBusca".')
   })
 })
 
-test('when send no term for paradas should return error', async t => {
+test('when send no termosBusca for paradas should return error', async t => {
   const auth = sptrans.auth(TOKEN)
   await sptrans.find({
     auth,
-    type: 'paradas'
+    tipo: 'paradas'
   }).catch(err => {
-    t.is(err.message, 'Error: O parâmetro "term" é obrigatório para este "type".')
+    t.is(err.message, 'Error: Parâmetro(s) obrigatório(s): "termosBusca".')
   })
 })
 
-test('when send no code for paradasPorLinha should return error', async t => {
+test('when send no codigoLinha for paradasPorLinha should return error', async t => {
   const auth = sptrans.auth(TOKEN)
   await sptrans.find({
     auth,
-    type: 'paradasPorLinha'
+    tipo: 'paradasPorLinha'
   }).catch(err => {
-    t.is(err.message, 'Error: O parâmetro "code" é obrigatório para este "type".')
+    t.is(err.message, 'Error: Parâmetro(s) obrigatório(s): "codigoLinha".')
   })
 })
 
-test('when send no code for paradasPorCorredor should return error', async t => {
+test('when send no codigoCorredor for paradasPorCorredor should return error', async t => {
   const auth = sptrans.auth(TOKEN)
   await sptrans.find({
     auth,
-    type: 'paradasPorCorredor'
+    tipo: 'paradasPorCorredor'
   }).catch(err => {
-    t.is(err.message, 'Error: O parâmetro "code" é obrigatório para este "type".')
+    t.is(err.message, 'Error: Parâmetro(s) obrigatório(s): "codigoCorredor".')
   })
 })
 
-test('when send no code for posicaoVeiculos should return error', async t => {
+test('when send no codigoLinha for posicaoVeiculos should return error', async t => {
   const auth = sptrans.auth(TOKEN)
   await sptrans.find({
     auth,
-    type: 'posicaoVeiculos'
+    tipo: 'posicaoVeiculos'
   }).catch(err => {
-    t.is(err.message, 'Error: O parâmetro "code" é obrigatório para este "type".')
+    t.is(err.message, 'Error: Parâmetro(s) obrigatório(s): "codigoLinha".')
   })
 })

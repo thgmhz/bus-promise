@@ -16,22 +16,36 @@ const hasAuth = options => {
 }
 
 const isAllowedType = options => {
-  options.type in API || handleError(`O "tipo" "${options.type}" não existe.`)
+  options.tipo in API || handleError(`O "tipo" "${options.tipo}" não existe.`)
   return options
 }
 
-const hasParams = options => {
-  const typeHasRequiredParam = 'param' in API[options.type]
-  if (!typeHasRequiredParam) return options
+const hasRequiredParams = options => {
+  const requiredParams = API[options.tipo].required
+  if (!requiredParams) return options
 
-  const proxyParam = API[options.type].proxyParam
-  proxyParam in options || handleError(`O parâmetro "${proxyParam}" é obrigatório para este "type".`)
+  const checkParam = param => !(param in options)
+  const missingParams = requiredParams.filter(checkParam)
+  missingParams.length === 0 || handleError(`Parâmetro(s) obrigatório(s): "${missingParams}".`)
 
-  const updatedOptions = Object.assign(options, {
-    paramValue: options[proxyParam]
-  })
+  return options
+}
 
-  return updatedOptions
+const buildParams = options => {
+  const requiredParams = API[options.tipo].required
+  if (!requiredParams) return options
+
+  const build = (acc, cur) => {
+    const paramValue = options[cur]
+    if (paramValue instanceof Array) {
+      return paramValue.map(value => ({ [cur]: value }))
+    }
+    acc[cur] = paramValue
+    return acc
+  }
+
+  const params = requiredParams.reduce(build, {})
+  return Object.assign(options, { params })
 }
 
 const validateHttpStatus = res => {
@@ -42,37 +56,26 @@ const validateHttpStatus = res => {
 const handleResponse = res => res.data
 
 const fetchData = options => {
-  const { auth, type, paramValue } = options
-
-  const buildPromise = value => {
-    let config = {
+  const buildPromise = params => {
+    const config = {
       method: 'get',
-      url: API.endpoint + API[type].route,
+      url: API.endpoint + API[options.tipo].route,
       headers: {
-        Cookie: auth
-      }
+        Cookie: options.auth
+      },
+      params
     }
-
-    if (value) {
-      const apiParam = API[type].param
-      config = Object.assign(config, {
-        params: {
-          [apiParam]: value
-        }
-      })
-    }
-
     return axios(config)
   }
 
-  if (paramValue instanceof Array) {
-    const promises = paramValue.map(buildPromise)
+  if (options.params instanceof Array) {
+    const promises = options.params.map(buildPromise)
     return Promise.all(promises)
       .then(res => res.map(validateHttpStatus))
       .then(res => res.map(handleResponse))
   }
 
-  return buildPromise(paramValue)
+  return buildPromise(options.params)
     .then(validateHttpStatus)
     .then(handleResponse)
 }
@@ -83,6 +86,7 @@ export default options =>
     .then(hasOptions)
     .then(hasAuth)
     .then(isAllowedType)
-    .then(hasParams)
+    .then(hasRequiredParams)
+    .then(buildParams)
     .then(fetchData)
     .catch(handleError)

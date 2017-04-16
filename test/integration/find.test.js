@@ -7,8 +7,8 @@ test('when find "linhas" as string should return the expected keys', async t => 
   const auth = await sptrans.auth(TOKEN)
   const response = await sptrans.find({
     auth,
-    type: 'linhas',
-    term: 'Sta. Mônica'
+    tipo: 'linhas',
+    termosBusca: 'Sta. Mônica'
   })
   const responseKeys = Object.keys(response[0])
   const expectedKeys = [
@@ -29,8 +29,8 @@ test('when find "linhas" as array should return the expected keys', async t => {
   const auth = await sptrans.auth(TOKEN)
   const response = await sptrans.find({
     auth,
-    type: 'linhas',
-    term: ['Sta. Mônica', 'Jaragua', 'Lapa']
+    tipo: 'linhas',
+    termosBusca: ['Sta. Mônica', 'Jaragua', 'Lapa']
   })
   const responseKeys = Object.keys(response[0][0])
   const expectedKeys = [
@@ -51,8 +51,8 @@ test('when find "paradas" as string should return the expected keys', async t =>
   const auth = await sptrans.auth(TOKEN)
   const response = await sptrans.find({
     auth,
-    type: 'paradas',
-    term: 'Av. Paulista'
+    tipo: 'paradas',
+    termosBusca: 'Av. Paulista'
   })
   const responseKeys = Object.keys(response[0])
   const expectedKeys = [
@@ -70,8 +70,8 @@ test('when find "paradas" as array should return the expected keys', async t => 
   const auth = await sptrans.auth(TOKEN)
   const response = await sptrans.find({
     auth,
-    type: 'paradas',
-    term: ['Av. Paulista', 'Av. Mutinga', 'Av. Faria Lima']
+    tipo: 'paradas',
+    termosBusca: ['Av. Paulista', 'Av. Mutinga', 'Av. Faria Lima']
   })
   const responseKeys = Object.keys(response[0][0])
   const expectedKeys = [
@@ -89,8 +89,8 @@ test('when find "paradasPorLinha" as integer should return the expected keys', a
   const auth = await sptrans.auth(TOKEN)
   const response = await sptrans.find({
     auth,
-    type: 'paradasPorLinha',
-    code: 34041
+    tipo: 'paradasPorLinha',
+    codigoLinha: 34041
   })
   const responseKeys = Object.keys(response[0])
   const expectedKeys = [
@@ -108,8 +108,8 @@ test('when find "paradasPorLinha" as array should return the expected keys', asy
   const auth = await sptrans.auth(TOKEN)
   const response = await sptrans.find({
     auth,
-    type: 'paradasPorLinha',
-    code: [34041, 34042, 34043]
+    tipo: 'paradasPorLinha',
+    codigoLinha: [34041, 34042, 34043]
   })
   const responseKeys = Object.keys(response[0][0])
   const expectedKeys = [
@@ -127,7 +127,7 @@ test('when find "corredores" should return the expected keys', async t => {
   const auth = await sptrans.auth(TOKEN)
   const response = await sptrans.find({
     auth,
-    type: 'corredores'
+    tipo: 'corredores'
   })
   const responseKeys = Object.keys(response[0])
   const expectedKeys = [
@@ -143,8 +143,8 @@ test('when find "paradasPorCorredor" as integer should return the expected keys'
   const auth = await sptrans.auth(TOKEN)
   const response = await sptrans.find({
     auth,
-    type: 'paradasPorCorredor',
-    code: 8
+    tipo: 'paradasPorCorredor',
+    codigoCorredor: 8
   })
   const responseKeys = Object.keys(response[0])
   const expectedKeys = [
@@ -162,8 +162,8 @@ test('when find "paradasPorCorredor" as array should return the expected keys', 
   const auth = await sptrans.auth(TOKEN)
   const response = await sptrans.find({
     auth,
-    type: 'paradasPorCorredor',
-    code: [8, 9]
+    tipo: 'paradasPorCorredor',
+    codigoCorredor: [8, 9]
   })
   const responseKeys = Object.keys(response[0][0])
   const expectedKeys = [
@@ -181,8 +181,8 @@ test('when find "posicaoVeiculos" should return the expected keys', async t => {
   const auth = await sptrans.auth(TOKEN)
   const response = await sptrans.find({
     auth,
-    type: 'posicaoVeiculos',
-    code: 34041
+    tipo: 'posicaoVeiculos',
+    codigoLinha: 34041
   })
   const responseKeys = Object.keys(response)
   const expectedKeys = [
@@ -197,8 +197,8 @@ test('when find "posicaoVeiculos" should return the expected keys', async t => {
   const auth = await sptrans.auth(TOKEN)
   const response = await sptrans.find({
     auth,
-    type: 'posicaoVeiculos',
-    code: [34041, 34042]
+    tipo: 'posicaoVeiculos',
+    codigoLinha: [34041, 34042]
   })
   const responseKeys = Object.keys(response[0])
   const expectedKeys = [
