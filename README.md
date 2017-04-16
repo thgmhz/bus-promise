@@ -52,8 +52,8 @@ Este é o principal método da biblioteca, você deve usá-lo para realizar busc
 - [Paradas por corredor](#paradas-por-corredor)
 - [Posição dos veículos](#posicao-dos-veiculos)
 - [Previsão de chegada](#previsao-de-chegada)
-- [Previsão linha](#previsao-linha)
-- [Previsão parada](#previsao-parada)
+- [Previsão da linha](#previsao-da-linha)
+- [Previsão da parada](#previsao-da-parada)
 
 #### Linhas
 O tipo `linhas` possibilita a consulta pelas linhas de ônibus da cidade de São Paulo.
