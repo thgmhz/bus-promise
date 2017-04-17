@@ -9,13 +9,13 @@ test('sptrans should has the find method', t => {
 
 test('when send no param should return error', async t => {
   await sptrans.find().catch(err => {
-    t.is(err.message, 'Error: O método "find" deve receber um objeto com opções.')
+    t.is(err.message, 'O método "find" deve receber um objeto com opções.')
   })
 })
 
 test('when send no auth param should return error', async t => {
   await sptrans.find({ auth: '' }).catch(err => {
-    t.is(err.message, 'Error: O método "find" deve receber o parâmetro "auth".')
+    t.is(err.message, 'O método "find" deve receber o parâmetro "auth".')
   })
 })
 
@@ -25,7 +25,7 @@ test('when send a not allowed param should return error', async t => {
     auth,
     tipo: 'not-allowed'
   }).catch(err => {
-    t.is(err.message, 'Error: O "tipo" "not-allowed" não existe.')
+    t.is(err.message, 'O "tipo" "not-allowed" não existe.')
   })
 })
 
@@ -35,7 +35,7 @@ test('when send no termosBusca to linhas should return error', async t => {
     auth,
     tipo: 'linhas'
   }).catch(err => {
-    t.is(err.message, 'Error: Parâmetro(s) obrigatório(s): "termosBusca".')
+    t.is(err.message, 'Parâmetro(s) obrigatório(s): "termosBusca".')
   })
 })
 
@@ -45,7 +45,7 @@ test('when send no termosBusca to paradas should return error', async t => {
     auth,
     tipo: 'paradas'
   }).catch(err => {
-    t.is(err.message, 'Error: Parâmetro(s) obrigatório(s): "termosBusca".')
+    t.is(err.message, 'Parâmetro(s) obrigatório(s): "termosBusca".')
   })
 })
 
@@ -55,7 +55,7 @@ test('when send no codigoLinha to paradasPorLinha should return error', async t 
     auth,
     tipo: 'paradasPorLinha'
   }).catch(err => {
-    t.is(err.message, 'Error: Parâmetro(s) obrigatório(s): "codigoLinha".')
+    t.is(err.message, 'Parâmetro(s) obrigatório(s): "codigoLinha".')
   })
 })
 
@@ -65,7 +65,7 @@ test('when send no codigoCorredor to paradasPorCorredor should return error', as
     auth,
     tipo: 'paradasPorCorredor'
   }).catch(err => {
-    t.is(err.message, 'Error: Parâmetro(s) obrigatório(s): "codigoCorredor".')
+    t.is(err.message, 'Parâmetro(s) obrigatório(s): "codigoCorredor".')
   })
 })
 
@@ -75,7 +75,7 @@ test('when send no codigoLinha to posicaoVeiculos should return error', async t 
     auth,
     tipo: 'posicaoVeiculos'
   }).catch(err => {
-    t.is(err.message, 'Error: Parâmetro(s) obrigatório(s): "codigoLinha".')
+    t.is(err.message, 'Parâmetro(s) obrigatório(s): "codigoLinha".')
   })
 })
 
@@ -85,7 +85,7 @@ test('when send no param value to previsaoChegada should return error', async t 
     auth,
     tipo: 'previsaoChegada'
   }).catch(err => {
-    t.is(err.message, 'Error: Parâmetro(s) obrigatório(s): "codigoParada,codigoLinha".')
+    t.is(err.message, 'Parâmetro(s) obrigatório(s): "codigoParada,codigoLinha".')
   })
 })
 
@@ -95,7 +95,7 @@ test('when send no codigoLinha to previsaoLinha should return error', async t =>
     auth,
     tipo: 'previsaoLinha'
   }).catch(err => {
-    t.is(err.message, 'Error: Parâmetro(s) obrigatório(s): "codigoLinha".')
+    t.is(err.message, 'Parâmetro(s) obrigatório(s): "codigoLinha".')
   })
 })
 
@@ -105,6 +105,6 @@ test('when send no codigoParada to previsaoLinha should return error', async t =
     auth,
     tipo: 'previsaoParada'
   }).catch(err => {
-    t.is(err.message, 'Error: Parâmetro(s) obrigatório(s): "codigoParada".')
+    t.is(err.message, 'Parâmetro(s) obrigatório(s): "codigoParada".')
   })
 })

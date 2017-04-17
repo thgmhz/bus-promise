@@ -1,4 +1,9 @@
-export default {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
   endpoint: 'http://api.olhovivo.sptrans.com.br/v0',
   heroku: 'https://sptrans-server.herokuapp.com/sptrans',
   auth: {
@@ -40,4 +45,4 @@ export default {
     route: '/previsao/parada',
     required: ['codigoParada']
   }
-}
+};

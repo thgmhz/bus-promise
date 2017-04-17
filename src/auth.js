@@ -1,8 +1,15 @@
 import axios from 'axios'
 import { API } from './constants'
 
+const isBrowser = typeof window !== 'undefined'
+
 const handleError = err => {
   throw new Error(err)
+}
+
+const handleResponse = res => {
+  if (isBrowser) return res.data
+  return res
 }
 
 const checkIfHasToken = token =>
@@ -18,16 +25,26 @@ const validateToken = res => {
   return res
 }
 
-const setCredentials = res => res.headers['set-cookie'][0]
+const setCredentials = res => {
+  if (isBrowser) return res.auth[0]
+  return res.headers['set-cookie'][0]
+}
 
 const fetchData = token => {
+  let url = API.endpoint + API.auth.route
+
+  if (isBrowser) {
+    url = `${API.heroku}/auth`
+  }
+
   const config = {
     method: 'post',
-    url: API.endpoint + API.auth.route,
+    url,
     params: { token }
   }
 
   return axios(config)
+    .then(handleResponse)
     .then(validateHttpStatus)
     .then(validateToken)
     .then(setCredentials)
