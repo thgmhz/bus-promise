@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { API } from './constants'
 
+const isBrowser = typeof window !== 'undefined'
+
 const handleError = err => {
   throw new Error(err)
 }
@@ -57,12 +59,24 @@ const handleResponse = res => res.data
 
 const fetchData = options => {
   const buildPromise = params => {
+    let url = API.endpoint + API[options.tipo].route
+    let headers = {
+      Cookie: options.auth
+    }
+
+    if (isBrowser && params) {
+      headers = null
+      url = API.heroku
+      Object.assign(params, {
+        auth: options.auth,
+        route: API[options.tipo].route
+      })
+    }
+
     const config = {
       method: 'get',
-      url: API.endpoint + API[options.tipo].route,
-      headers: {
-        Cookie: options.auth
-      },
+      url,
+      headers,
       params
     }
     return axios(config)
@@ -80,7 +94,6 @@ const fetchData = options => {
     .then(handleResponse)
 }
 
-
 export default options =>
   Promise.resolve(options)
     .then(hasOptions)
@@ -89,4 +102,3 @@ export default options =>
     .then(hasRequiredParams)
     .then(buildParams)
     .then(fetchData)
-    .catch(handleError)
