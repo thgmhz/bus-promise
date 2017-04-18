@@ -3,11 +3,11 @@ import { API } from './constants'
 
 const isBrowser = typeof window !== 'undefined'
 
-const handleError = err => {
+function handleError (err) {
   throw new Error(err)
 }
 
-const hasOptions = options => {
+function hasOptions (options) {
   options || handleError('O método "find" deve receber um objeto com opções.')
   return options
 }
@@ -17,12 +17,12 @@ const hasAuth = options => {
   return options
 }
 
-const isAllowedType = options => {
+function isAllowedType (options) {
   options.tipo in API || handleError(`O "tipo" "${options.tipo}" não existe.`)
   return options
 }
 
-const hasRequiredParams = options => {
+function hasRequiredParams (options) {
   const requiredParams = API[options.tipo].required
   if (!requiredParams) return options
 
@@ -33,7 +33,7 @@ const hasRequiredParams = options => {
   return options
 }
 
-const buildParams = options => {
+function buildParams (options) {
   const requiredParams = API[options.tipo].required
   if (!requiredParams) return options
 
@@ -50,14 +50,16 @@ const buildParams = options => {
   return Object.assign(options, { params })
 }
 
-const validateHttpStatus = res => {
+function validateHttpStatus (res) {
   res.status === 200 || handleError(`Erro ${res.status} ao se conectar com o serviço da SPTrans.`)
   return res
 }
 
-const handleResponse = res => res.data
+function handleResponse (res) {
+  return res.data
+}
 
-const fetchData = options => {
+function fetchData (options) {
   const buildPromise = params => {
     let url = API.endpoint + API[options.tipo].route
     let headers = {
