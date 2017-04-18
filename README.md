@@ -16,7 +16,7 @@ Busca informações em tempo real da frota de ônibus da SPTrans na cidade de S�
 <br>
 
 ## Sobre
-O **SPTrans Promise** é uma biblioteca *Javascript (client-side e server-side)* feita para facilitar o acesso a API da SPTrans que disponibiliza dados em tempo real da frota de ônibus da cidade de São Paulo.
+O **sptrans-promise** é uma biblioteca *Javascript (client-side e server-side)* feita para facilitar o acesso a API da SPTrans que disponibiliza dados em tempo real da frota de ônibus da cidade de São Paulo.
 
 
 ## Como utilizar
@@ -25,6 +25,17 @@ O **SPTrans Promise** é uma biblioteca *Javascript (client-side e server-side)*
 ``` bash
 $ npm install --save sptrans-promise
 ```
+
+#### Node.js
+``` js
+import sptrans from 'sptrans-promise'
+```
+
+#### Browser
+Você pode instalar o **sptrans-promise** via `npm` e então importar o script através do caminho:
+`node_modules/sptrans-promise/build/browser/sptrans-promise.min.js`.
+
+Ou se preferir pode copiar o script minificado, [clique aqui](https://github.com/thiagommedeiros/sptrans-promise/blob/master/build/browser/sptrans-promise.min.js).
 
 ### Token
 
