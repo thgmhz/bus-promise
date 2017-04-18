@@ -1,7 +1,7 @@
 <h1 align="center">SPTrans Promise</h1>
 
 <p align="center">
-<a href="https://travis-ci.org/thiagommedeiros/sptrans-promise" target="_blank"> 
+<a href="https://travis-ci.org/thiagommedeiros/sptrans-promise" target="_blank">
 <img src="https://travis-ci.org/thiagommedeiros/sptrans-promise.svg?branch=master">
 </a>
 <a href="https://www.npmjs.com/package/sptrans-promise" target="_blank">
@@ -16,8 +16,6 @@
 Busca informações em tempo real da frota de ônibus da SPTrans na cidade de São Paulo.
 </p>
 
-<br>
-
 ## Sobre
 O **sptrans-promise** é uma biblioteca *Javascript (client-side e server-side)* feita para facilitar o acesso a API da SPTrans que disponibiliza dados em tempo real da frota de ônibus da cidade de São Paulo.
 
@@ -29,16 +27,16 @@ O **sptrans-promise** é uma biblioteca *Javascript (client-side e server-side)*
 $ npm install --save sptrans-promise
 ```
 
-#### Node.js
+##### Node.js
 ``` js
 import sptrans from 'sptrans-promise'
 ```
 
-#### Browser
-Você pode instalar o **sptrans-promise** via `npm` e então importar o script através do caminho:
-`node_modules/sptrans-promise/build/browser/sptrans-promise.min.js`.
+##### Browser
+Você pode instalar o **sptrans-promise** via `npm` e importar o script através do caminho:
+`node_modules/sptrans-promise/build/browser/sptrans-promise.min.js`. Ou se preferir pode copiar o script, [clique aqui](https://github.com/thiagommedeiros/sptrans-promise/blob/master/build/browser/sptrans-promise.min.js).
 
-Ou se preferir pode copiar o script minificado, [clique aqui](https://github.com/thiagommedeiros/sptrans-promise/blob/master/build/browser/sptrans-promise.min.js).
+A biblioteca estará acessível pela variável global `sptrans`.
 
 ### Token
 
@@ -63,10 +61,10 @@ Este é o principal método da biblioteca, você deve usá-lo para realizar busc
 - [Paradas por linha](#paradas-por-linha)
 - [Corredores](#corredores)
 - [Paradas por corredor](#paradas-por-corredor)
-- [Posição dos veículos](#posicao-dos-veiculos)
-- [Previsão de chegada](#previsao-de-chegada)
-- [Previsão da linha](#previsao-da-linha)
-- [Previsão da parada](#previsao-da-parada)
+- [Posição dos veículos](#posição-dos-veículos)
+- [Previsão de chegada](#previsão-de-chegada)
+- [Previsão da linha](#previsão-da-linha)
+- [Previsão da parada](#previsão-da-parada)
 
 #### Linhas
 O tipo `linhas` possibilita a consulta pelas linhas de ônibus da cidade de São Paulo.
