@@ -3,34 +3,36 @@ import { API } from './constants'
 
 const isBrowser = typeof window !== 'undefined'
 
-const handleError = err => {
+function handleError (err) {
   throw new Error(err)
 }
 
-const handleResponse = res => {
+function handleResponse (res) {
   if (isBrowser) return res.data
   return res
 }
 
-const checkIfHasToken = token =>
+function checkIfHasToken (token) {
   token || handleError('O token é obrigatório para autenticação.')
+  return token
+}
 
-const validateHttpStatus = res => {
+function validateHttpStatus (res) {
   res.status === 200 || handleError('Erro ao se conectar com o serviço da SPTrans.')
   return res
 }
 
-const validateToken = res => {
+function validateToken (res) {
   res.data || handleError('Token inválido.')
   return res
 }
 
-const setCredentials = res => {
+function setCredentials (res) {
   if (isBrowser) return res.auth[0]
   return res.headers['set-cookie'][0]
 }
 
-const fetchData = token => {
+function fetchData (token) {
   let url = API.endpoint + API.auth.route
 
   if (isBrowser) {
