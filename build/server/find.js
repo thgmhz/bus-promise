@@ -16,26 +16,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var isBrowser = typeof window !== 'undefined';
 
-var handleError = function handleError(err) {
+function handleError(err) {
   throw new Error(err);
-};
+}
 
-var hasOptions = function hasOptions(options) {
+function hasOptions(options) {
   options || handleError('O método "find" deve receber um objeto com opções.');
   return options;
-};
+}
 
 var hasAuth = function hasAuth(options) {
   options.auth || handleError('O método "find" deve receber o parâmetro "auth".');
   return options;
 };
 
-var isAllowedType = function isAllowedType(options) {
+function isAllowedType(options) {
   options.tipo in _constants.API || handleError('O "tipo" "' + options.tipo + '" n\xE3o existe.');
   return options;
-};
+}
 
-var hasRequiredParams = function hasRequiredParams(options) {
+function hasRequiredParams(options) {
   var requiredParams = _constants.API[options.tipo].required;
   if (!requiredParams) return options;
 
@@ -46,9 +46,9 @@ var hasRequiredParams = function hasRequiredParams(options) {
   missingParams.length === 0 || handleError('Par\xE2metro(s) obrigat\xF3rio(s): "' + missingParams + '".');
 
   return options;
-};
+}
 
-var buildParams = function buildParams(options) {
+function buildParams(options) {
   var requiredParams = _constants.API[options.tipo].required;
   if (!requiredParams) return options;
 
@@ -65,18 +65,18 @@ var buildParams = function buildParams(options) {
 
   var params = requiredParams.reduce(build, {});
   return Object.assign(options, { params: params });
-};
+}
 
-var validateHttpStatus = function validateHttpStatus(res) {
+function validateHttpStatus(res) {
   res.status === 200 || handleError('Erro ' + res.status + ' ao se conectar com o servi\xE7o da SPTrans.');
   return res;
-};
+}
 
-var handleResponse = function handleResponse(res) {
+function handleResponse(res) {
   return res.data;
-};
+}
 
-var fetchData = function fetchData(options) {
+function fetchData(options) {
   var buildPromise = function buildPromise(params) {
     var url = _constants.API.endpoint + _constants.API[options.tipo].route;
     var headers = {
@@ -111,7 +111,7 @@ var fetchData = function fetchData(options) {
   }
 
   return buildPromise(options.params).then(validateHttpStatus).then(handleResponse);
-};
+}
 
 exports.default = function (options) {
   return Promise.resolve(options).then(hasOptions).then(hasAuth).then(isAllowedType).then(hasRequiredParams).then(buildParams).then(fetchData);
