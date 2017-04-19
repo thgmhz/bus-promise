@@ -73,7 +73,7 @@ Aceita o nome da linha ou letreiro. O valor deve ser passado pelo parâmetro `te
 ``` js
 import sptrans from 'sptrans-promise'
 
-const encontrarLinhas = auth => {
+function encontrarLinhas (auth) {
   sptrans.find({
     auth,
     tipo: 'linhas',
