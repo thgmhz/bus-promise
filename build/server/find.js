@@ -10,6 +10,8 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _constants = require('./constants');
 
+var _helpers = require('./helpers');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -72,7 +74,10 @@ function validateHttpStatus(res) {
   return res;
 }
 
-function handleResponse(res) {
+function handleResponse(res, options) {
+  if (options.tipo === 'linhas') {
+    return (0, _helpers.buildLinhasResponse)(res.data);
+  }
   return res.data;
 }
 
@@ -110,7 +115,9 @@ function fetchData(options) {
     });
   }
 
-  return buildPromise(options.params).then(validateHttpStatus).then(handleResponse);
+  return buildPromise(options.params).then(validateHttpStatus).then(function (res) {
+    return handleResponse(res, options);
+  });
 }
 
 exports.default = function (options) {
