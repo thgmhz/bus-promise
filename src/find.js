@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { API } from './constants'
+import { buildLinhasResponse } from './helpers'
 
 const isBrowser = typeof window !== 'undefined'
 
@@ -55,7 +56,10 @@ function validateHttpStatus (res) {
   return res
 }
 
-function handleResponse (res) {
+function handleResponse (res, options) {
+  if (options.tipo === 'linhas') {
+    return buildLinhasResponse(res.data)
+  }
   return res.data
 }
 
@@ -93,7 +97,7 @@ function fetchData (options) {
 
   return buildPromise(options.params)
     .then(validateHttpStatus)
-    .then(handleResponse)
+    .then(res => handleResponse(res, options))
 }
 
 export default options =>
