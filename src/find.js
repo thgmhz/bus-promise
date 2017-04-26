@@ -72,7 +72,7 @@ function fetchData (options) {
 
     if (isBrowser && params) {
       headers = null
-      url = API.heroku
+      url = `${API.heroku}/find`
       Object.assign(params, {
         auth: options.auth,
         route: API[options.tipo].route
