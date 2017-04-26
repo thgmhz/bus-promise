@@ -84,15 +84,6 @@ function encontrarLinhas (auth) {
 sptrans.auth('SEU_TOKEN_AQUI')
   .then(encontrarLinhas)
 ```
-O parâmetro `termosBusca` também aceita um `array` de `strings` para buscar várias linhas ao mesmo tempo. Exemplo:
-
-``` js
-sptrans.find({
-  auth,
-  tipo: 'linhas',
-  termosBusca: ['Term. Lapa', 'Term. Pirituba']
-}).then(console.log)
-```
 
 #### Paradas
 O tipo `paradas` possibilita a consulta pelos pontos de parada da cidade de São Paulo.
