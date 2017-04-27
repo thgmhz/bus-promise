@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _promise = require('babel-runtime/core-js/promise');
+
+var _promise2 = _interopRequireDefault(_promise);
+
 var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
@@ -60,5 +64,5 @@ function fetchData(token) {
 }
 
 exports.default = function (token) {
-  return Promise.resolve(token).then(checkIfHasToken).then(fetchData).catch(handleError);
+  return _promise2.default.resolve(token).then(checkIfHasToken).then(fetchData);
 };

@@ -4,6 +4,18 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _promise = require('babel-runtime/core-js/promise');
+
+var _promise2 = _interopRequireDefault(_promise);
+
+var _assign = require('babel-runtime/core-js/object/assign');
+
+var _assign2 = _interopRequireDefault(_assign);
+
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
 var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
@@ -13,8 +25,6 @@ var _constants = require('./constants');
 var _helpers = require('./helpers');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var isBrowser = typeof window !== 'undefined';
 
@@ -58,7 +68,7 @@ function buildParams(options) {
     var paramValue = options[cur];
     if (paramValue instanceof Array) {
       return paramValue.map(function (value) {
-        return _defineProperty({}, cur, value);
+        return (0, _defineProperty3.default)({}, cur, value);
       });
     }
     acc[cur] = paramValue;
@@ -66,7 +76,7 @@ function buildParams(options) {
   };
 
   var params = requiredParams.reduce(build, {});
-  return Object.assign(options, { params: params });
+  return (0, _assign2.default)(options, { params: params });
 }
 
 function validateHttpStatus(res) {
@@ -90,8 +100,8 @@ function fetchData(options) {
 
     if (isBrowser && params) {
       headers = null;
-      url = _constants.API.heroku;
-      Object.assign(params, {
+      url = _constants.API.heroku + '/find';
+      (0, _assign2.default)(params, {
         auth: options.auth,
         route: _constants.API[options.tipo].route
       });
@@ -108,7 +118,7 @@ function fetchData(options) {
 
   if (options.params instanceof Array) {
     var promises = options.params.map(buildPromise);
-    return Promise.all(promises).then(function (res) {
+    return _promise2.default.all(promises).then(function (res) {
       return res.map(validateHttpStatus);
     }).then(function (res) {
       return res.map(handleResponse);
@@ -121,5 +131,5 @@ function fetchData(options) {
 }
 
 exports.default = function (options) {
-  return Promise.resolve(options).then(hasOptions).then(hasAuth).then(isAllowedType).then(hasRequiredParams).then(buildParams).then(fetchData);
+  return _promise2.default.resolve(options).then(hasOptions).then(hasAuth).then(isAllowedType).then(hasRequiredParams).then(buildParams).then(fetchData);
 };
