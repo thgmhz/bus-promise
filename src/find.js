@@ -13,7 +13,7 @@ function hasOptions (options) {
   return options
 }
 
-const hasAuth = options => {
+function hasAuth (options) {
   options.auth || handleError('O método "find" deve receber o parâmetro "auth".')
   return options
 }
@@ -77,6 +77,11 @@ function fetchData (options) {
         auth: options.auth,
         route: API[options.tipo].route
       })
+    }
+
+    if (options.tipo === 'trajeto') {
+      headers = null
+      url = `${API.heroku}/shapes/${options.codigoTrajeto}`
     }
 
     const config = {

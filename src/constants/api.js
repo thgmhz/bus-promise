@@ -10,6 +10,10 @@ export default {
     route: '/linha/buscar',
     required: ['termosBusca']
   },
+  trajeto: {
+    route: '/shapes',
+    required: ['codigoTrajeto']
+  },
   paradas: {
     route: '/parada/buscar',
     required: ['termosBusca']
