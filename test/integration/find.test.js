@@ -27,7 +27,7 @@ test('when find "linhas" should return the expected keys', async t => {
   t.true(response instanceof Array)
 })
 
-test('when find "trajeto" shound return the expected keys', async t => {
+test('when find "trajeto" should return the expected keys', async t => {
   const auth = await sptrans.auth(TOKEN)
   const response = await sptrans.find({
     auth,
