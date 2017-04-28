@@ -2,7 +2,7 @@
   "name": "sptrans-promise",
   "author": "Thiago M. Medeiros",
   "description": "Busca informações em tempo real da frota de ônibus da SPTrans na cidade de São Paulo.",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "MIT",
   "main": "build/server/index.js",
   "homepage": "https://github.com/thiagommedeiros/sptrans-promise",
