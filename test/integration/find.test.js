@@ -10,7 +10,7 @@ test('when find "linhas" should return the expected keys', async t => {
     auth,
     tipo: 'linhas',
     termosBusca: 'Sta. Mônica'
-  }).catch(console.log)
+  })
   const responseKeys = Object.keys(response[0])
   const expectedKeys = [
     'CodigoLinha',
