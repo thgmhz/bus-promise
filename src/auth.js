@@ -33,10 +33,10 @@ function setCredentials (res) {
 }
 
 function fetchData (token) {
-  let url = API.endpoint + API.auth.route
+  let url = API.sptrans + API.auth.route
 
   if (isBrowser) {
-    url = `${API.heroku}/auth`
+    url = `${API.server}/auth`
   }
 
   const config = {

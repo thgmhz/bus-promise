@@ -65,14 +65,14 @@ function handleResponse (res, options) {
 
 function fetchData (options) {
   const buildPromise = params => {
-    let url = API.endpoint + API[options.tipo].route
+    let url = API.sptrans + API[options.tipo].route
     let headers = {
       Cookie: options.auth
     }
 
     if (isBrowser && params) {
       headers = null
-      url = `${API.heroku}/find`
+      url = `${API.server}/find`
       Object.assign(params, {
         auth: options.auth,
         route: API[options.tipo].route
@@ -81,7 +81,7 @@ function fetchData (options) {
 
     if (options.tipo === 'trajeto') {
       headers = null
-      url = `${API.heroku}/shapes/${options.codigoTrajeto}`
+      url = `${API.server}/shapes/${options.codigoTrajeto}`
     }
 
     const config = {
