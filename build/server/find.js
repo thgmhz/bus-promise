@@ -37,10 +37,10 @@ function hasOptions(options) {
   return options;
 }
 
-var hasAuth = function hasAuth(options) {
+function hasAuth(options) {
   options.auth || handleError('O método "find" deve receber o parâmetro "auth".');
   return options;
-};
+}
 
 function isAllowedType(options) {
   options.tipo in _constants.API || handleError('O "tipo" "' + options.tipo + '" n\xE3o existe.');
@@ -105,6 +105,11 @@ function fetchData(options) {
         auth: options.auth,
         route: _constants.API[options.tipo].route
       });
+    }
+
+    if (options.tipo === 'trajeto') {
+      headers = null;
+      url = _constants.API.heroku + '/shapes/' + options.codigoTrajeto;
     }
 
     var config = {
