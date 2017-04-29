@@ -34,7 +34,7 @@ exports.default = function () {
             buildPromise = function buildPromise(tripId) {
               return (0, _axios2.default)({
                 method: 'get',
-                url: _constants.API.heroku + '/trips/' + tripId
+                url: _constants.API.server + '/trips/' + tripId
               });
             };
 

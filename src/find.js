@@ -13,7 +13,7 @@ function hasOptions (options) {
   return options
 }
 
-const hasAuth = options => {
+function hasAuth (options) {
   options.auth || handleError('O método "find" deve receber o parâmetro "auth".')
   return options
 }
@@ -65,18 +65,23 @@ function handleResponse (res, options) {
 
 function fetchData (options) {
   const buildPromise = params => {
-    let url = API.endpoint + API[options.tipo].route
+    let url = API.sptrans + API[options.tipo].route
     let headers = {
       Cookie: options.auth
     }
 
     if (isBrowser && params) {
       headers = null
-      url = `${API.heroku}/find`
+      url = `${API.server}/find`
       Object.assign(params, {
         auth: options.auth,
         route: API[options.tipo].route
       })
+    }
+
+    if (options.tipo === 'trajeto') {
+      headers = null
+      url = `${API.server}/shapes/${options.codigoTrajeto}`
     }
 
     const config = {

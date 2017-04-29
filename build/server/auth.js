@@ -48,10 +48,10 @@ function setCredentials(res) {
 }
 
 function fetchData(token) {
-  var url = _constants.API.endpoint + _constants.API.auth.route;
+  var url = _constants.API.sptrans + _constants.API.auth.route;
 
   if (isBrowser) {
-    url = _constants.API.heroku + '/auth';
+    url = _constants.API.server + '/auth';
   }
 
   var config = {

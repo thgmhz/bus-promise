@@ -5,7 +5,7 @@ export default async function buildLinhasResponse (linhas) {
   const buildPromise = tripId =>
     axios({
       method: 'get',
-      url: `${API.heroku}/trips/${tripId}`
+      url: `${API.server}/trips/${tripId}`
     })
 
   const getShapesIds = tripsIds => {
