@@ -1,3 +1,21 @@
+<h1 align="center">SPTrans Promise</h1>
+
+<p align="center">
+<a href="https://travis-ci.org/thiagommedeiros/sptrans-promise" target="_blank">
+<img src="https://travis-ci.org/thiagommedeiros/sptrans-promise.svg?branch=master">
+</a>
+<a href="https://www.npmjs.com/package/sptrans-promise" target="_blank">
+<img src="https://img.shields.io/npm/v/sptrans-promise.svg?style=flat-square">
+</a>
+<a href="https://github.com/thiagommedeiros/sptrans-promise/blob/master/LICENSE" target="_blank">
+<img src="https://img.shields.io/github/license/mashape/apistatus.svg">
+</a>
+</p>
+
+<p align="center">
+Busca informações em tempo real da frota de ônibus da SPTrans na cidade de São Paulo.
+</p>
+
 ## Sobre
 O **sptrans-promise** é uma biblioteca *Javascript (client-side e server-side)* feita para facilitar o acesso a API da SPTrans que disponibiliza dados em tempo real da frota de ônibus da cidade de São Paulo.
 
@@ -65,7 +83,7 @@ function encontrarLinhas (auth) {
 }
 ```
 ##### Exemplo de resposta
-``` json
+``` js
 [{
     CodigoLinha: 34022,
     CodigoTrajeto: 63468,
@@ -91,7 +109,7 @@ sptrans.find({
 }).then(console.log)
 ```
 ##### Exemplo de resposta
-``` json
+``` js
 [{
     shape_id: '63468',
     shape_pt_lat: '-23.516524',
@@ -122,7 +140,7 @@ sptrans.find({
 }).then(console.log)
 ```
 ##### Exemplo de resposta
-``` json
+``` js
 [{
     CodigoParada: 260015039,
     Nome: 'PAULISTA B/C',
@@ -153,7 +171,7 @@ sptrans.find({
 }).then(console.log)
 ```
 ##### Exemplo de resposta
-``` json
+``` js
 [{
     CodigoParada: 480014608,
     Nome: 'TIBERIO C/B',
@@ -174,7 +192,7 @@ sptrans.find({
 }).then(console.log)
 ```
 ##### Exemplo de resposta
-``` json
+``` js
 [{
     CodCot: 0,
     CodCorredor: 8,
@@ -203,7 +221,7 @@ sptrans.find({
 }).then(console.log)
 ```
 ##### Exemplo de resposta
-``` json
+``` js
 [{
     CodigoParada: 120011367,
     Nome: 'TRES IRMAOS C/B',
