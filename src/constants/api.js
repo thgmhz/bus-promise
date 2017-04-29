@@ -1,7 +1,7 @@
 export default {
   localhost: 'http://localhost:8888',
   sptrans: 'http://api.olhovivo.sptrans.com.br/v0',
-  server: 'http://sample-env.yx3tdkimgd.us-west-2.elasticbeanstalk.com',
+  server: 'https://sptrans-server.herokuapp.com',
   auth: {
     route: '/login/autenticar',
     required: ['token']
