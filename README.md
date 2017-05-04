@@ -95,6 +95,17 @@ function encontrarLinhas (auth) {
     DenominacaoTSTP: 'STA. MÔNICA',
     Informacoes: null
 }]
+
+Para obter todas as linhas:
+
+``` js
+sptrans.find({
+  auth,
+  tipo: 'linhas',
+  termosBusca: '*'
+}).then(console.log)
+```
+
 ```
 #### Trajeto
 O tipo `trajeto` retorna uma lista com a latitude e longitude de cada rua que o ônibus passa.
