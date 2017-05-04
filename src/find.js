@@ -57,7 +57,7 @@ function validateHttpStatus (res) {
 }
 
 function handleResponse (res, options) {
-  if (options.tipo === 'linhas') {
+  if (options.tipo === 'linhas' && options.params.termosBusca !== '*') {
     return buildLinhasResponse(res.data)
   }
   return res.data
@@ -82,6 +82,11 @@ function fetchData (options) {
     if (options.tipo === 'trajeto') {
       headers = null
       url = `${API.server}/shapes/${options.codigoTrajeto}`
+    }
+
+    if (options.tipo === 'linhas' && params.termosBusca === '*') {
+      headers = null
+      url = `${API.server}/trips`
     }
 
     const config = {

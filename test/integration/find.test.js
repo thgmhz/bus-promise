@@ -4,7 +4,7 @@ import sptrans from '../../src'
 // token livre para testes
 const TOKEN = '1e7c20905fe86990c5227e7e9f00002fe908d4d4dd4d7c0091032dacd2d0e07d'
 
-test('when find "linhas" should return the expected keys', async t => {
+test('when find "linhas" with "termosBusca" should return the expected keys', async t => {
   const auth = await sptrans.auth(TOKEN)
   const response = await sptrans.find({
     auth,
@@ -22,6 +22,26 @@ test('when find "linhas" should return the expected keys', async t => {
     'DenominacaoTPTS',
     'DenominacaoTSTP',
     'Informacoes'
+  ]
+  t.deepEqual(responseKeys, expectedKeys)
+  t.true(response instanceof Array)
+})
+
+test('when find "linhas" with "termosBusca" equal "*" should return the expected keys', async t => {
+  const auth = await sptrans.auth(TOKEN)
+  const response = await sptrans.find({
+    auth,
+    tipo: 'linhas',
+    termosBusca: '*'
+  })
+  const responseKeys = Object.keys(response[0])
+  const expectedKeys = [
+    'route_id',
+    'service_id',
+    'trip_id',
+    'trip_headsign',
+    'direction_id',
+    'shape_id'
   ]
   t.deepEqual(responseKeys, expectedKeys)
   t.true(response instanceof Array)
