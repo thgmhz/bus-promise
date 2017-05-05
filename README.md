@@ -320,6 +320,9 @@ sptrans.find({
 ## Como contribuir
 Para contribuir com o projeto, [clique aqui](https://github.com/thiagommedeiros/sptrans-promise/blob/master/CONTRIBUTING.md).
 
+## Changelog
+Para verificar o changelog, [clique aqui](https://github.com/thiagommedeiros/sptrans-promise/blob/master/CONTRIBUTING.md).
+
 ## Autor
 
 | [<img src="https://avatars0.githubusercontent.com/u/19213244?v=3&s=115"><br><sub>@thiagommedeiros</sub>](https://github.com/thiagommedeiros) |
