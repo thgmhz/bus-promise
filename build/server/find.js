@@ -85,7 +85,7 @@ function validateHttpStatus(res) {
 }
 
 function handleResponse(res, options) {
-  if (options.tipo === 'linhas') {
+  if (options.tipo === 'linhas' && options.params.termosBusca !== '*') {
     return (0, _helpers.buildLinhasResponse)(res.data);
   }
   return res.data;
@@ -110,6 +110,11 @@ function fetchData(options) {
     if (options.tipo === 'trajeto') {
       headers = null;
       url = _constants.API.server + '/shapes/' + options.codigoTrajeto;
+    }
+
+    if (options.tipo === 'linhas' && params.termosBusca === '*') {
+      headers = null;
+      url = _constants.API.server + '/trips';
     }
 
     var config = {

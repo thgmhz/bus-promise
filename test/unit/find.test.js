@@ -30,16 +30,6 @@ test('when send a not allowed param should return error', async t => {
   })
 })
 
-test('when send no termosBusca to linhas should return error', async t => {
-  const auth = sptrans.auth(TOKEN)
-  await sptrans.find({
-    auth,
-    tipo: 'linhas'
-  }).catch(err => {
-    t.is(err.message, 'Parâmetro(s) obrigatório(s): "termosBusca".')
-  })
-})
-
 test('when send no termosBusca to paradas should return error', async t => {
   const auth = sptrans.auth(TOKEN)
   await sptrans.find({
