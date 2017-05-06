@@ -1,3 +1,6 @@
+<p align="center">
+<img src="https://raw.githubusercontent.com/thiagommedeiros/sptrans-promise/master/bus.gif"
+</p>
 <h1 align="center">SPTrans Promise</h1>
 
 <p align="center">
@@ -321,7 +324,7 @@ sptrans.find({
 Para contribuir com o projeto, [clique aqui](https://github.com/thiagommedeiros/sptrans-promise/blob/master/CONTRIBUTING.md).
 
 ## Changelog
-Para verificar o changelog, [clique aqui](https://github.com/thiagommedeiros/sptrans-promise/blob/master/CONTRIBUTING.md).
+Para verificar o changelog, [clique aqui](https://github.com/thiagommedeiros/sptrans-promise/blob/master/CHANGELOG.md).
 
 ## Autor
 
