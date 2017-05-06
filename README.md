@@ -1,3 +1,6 @@
+<p align="center">
+<img src="https://raw.githubusercontent.com/thiagommedeiros/sptrans-promise/master/bus.gif"
+</p>
 <h1 align="center">SPTrans Promise</h1>
 
 <p align="center">
@@ -42,7 +45,7 @@ A API da SPTrans exige autenticação com um `token` que você pode obter ao  se
 
 ## Autenticação
 O método `auth()` recebe um `token` e retorna uma `Promise` com as `credentials`.
-
+ 
 ``` js
 import sptrans from 'sptrans-promise'
 
@@ -95,7 +98,7 @@ function encontrarLinhas (auth) {
     DenominacaoTSTP: 'STA. MÔNICA',
     Informacoes: null
 }]
-
+```
 Para obter todas as linhas:
 
 ``` js
@@ -106,7 +109,6 @@ sptrans.find({
 }).then(console.log)
 ```
 
-```
 #### Trajeto
 O tipo `trajeto` retorna uma lista com a latitude e longitude de cada rua que o ônibus passa.
 
@@ -321,7 +323,7 @@ sptrans.find({
 Para contribuir com o projeto, [clique aqui](https://github.com/thiagommedeiros/sptrans-promise/blob/master/CONTRIBUTING.md).
 
 ## Changelog
-Para verificar o changelog, [clique aqui](https://github.com/thiagommedeiros/sptrans-promise/blob/master/CONTRIBUTING.md).
+Para verificar o changelog, [clique aqui](https://github.com/thiagommedeiros/sptrans-promise/blob/master/CHANGELOG.md).
 
 ## Autor
 
