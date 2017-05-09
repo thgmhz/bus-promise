@@ -45,7 +45,7 @@ A API da SPTrans exige autenticação com um `token` que você pode obter ao  se
 
 ## Autenticação
 O método `auth()` recebe um `token` e retorna uma `Promise` com as `credentials`.
-
+ 
 ``` js
 import sptrans from 'sptrans-promise'
 
@@ -109,7 +109,6 @@ sptrans.find({
 }).then(console.log)
 ```
 
-```
 #### Trajeto
 O tipo `trajeto` retorna uma lista com a latitude e longitude de cada rua que o ônibus passa.
 
