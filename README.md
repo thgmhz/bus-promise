@@ -98,7 +98,7 @@ function encontrarLinhas (auth) {
     DenominacaoTSTP: 'STA. MÔNICA',
     Informacoes: null
 }]
-
+```
 Para obter todas as linhas:
 
 ``` js
