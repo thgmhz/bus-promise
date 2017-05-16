@@ -36,8 +36,7 @@ import sptrans from 'sptrans-promise'
 ```
 
 ##### Browser
-Você pode instalar o **sptrans-promise** via `npm` e importar o script através do caminho:
-`node_modules/sptrans-promise/build/browser/sptrans-promise.min.js`. Ou se preferir pode copiar o script [clicando aqui](https://github.com/thiagommedeiros/sptrans-promise/blob/master/build/browser/sptrans-promise.min.js). A biblioteca estará acessível através da variável global `sptrans`.
+Você pode instalar o **sptrans-promise** via `npm`. Ou se preferir pode copiar o script [clicando aqui](https://github.com/thiagommedeiros/sptrans-promise/blob/master/build/browser/sptrans-promise.min.js). Os métodos estarão acessíveis através da variável global `sptrans`.
 
 ### Token
 
@@ -58,6 +57,7 @@ sptrans.auth('SEU_TOKEN_AQUI')
 Este é o principal método da biblioteca, você deve usá-lo para realizar buscas pelos seguintes tipos de dados:
 
 - [Linhas](#linhas)
+- [Trajeto](#trajeto)
 - [Paradas](#paradas)
 - [Paradas por linha](#paradas-por-linha)
 - [Corredores](#corredores)
