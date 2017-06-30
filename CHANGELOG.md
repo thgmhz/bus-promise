@@ -1,5 +1,5 @@
 ## 1.0.8 (Jun 27, 2017)
-- **Rename:** The library name was changed from `sptrans-promise` to `bus-promise` ([@thiagommedeiros](https://github.com/thiagommedeiros) in [20](https://github.com/thiagommedeiros/bus-promise/pull/20)
+- **Rename:** The library name was changed from `sptrans-promise` to `bus-promise` ([@thiagommedeiros](https://github.com/thiagommedeiros) in [#25](https://github.com/thiagommedeiros/bus-promise/pull/25)
 
 ## 1.0.7 (May 12, 2017)
 - **Bug-fix:** Fixed the bug when a `linha` haven't a `shape_id` ([@thiagommedeiros](https://github.com/thiagommedeiros) in [#19](https://github.com/thiagommedeiros/bus-promise/pull/19)
