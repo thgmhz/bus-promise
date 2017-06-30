@@ -20,7 +20,10 @@ Busca informações em tempo real da frota de ônibus da SPTrans na cidade de S�
 </p>
 
 ## Sobre
-O **bus-promise** é uma biblioteca *Javascript (client-side e server-side)* feita para facilitar o uso da API da SPTrans, que disponibiliza dados em tempo real da frota de ônibus da cidade de São Paulo.
+A SPtrans disponibiliza uma API para consulta de alguns dados, porém outros dados estão disponíveis somente em arquivos `.csv` que seguem a especificação GTFS (General Transit Feed Specification). O **bus-promise** é uma biblioteca *Javascript (client-side e server-side)* feita para facilitar o uso da API e dos arquivos GTFS da SPTrans.
+
+## Como funciona
+O **bus-promise** faz requisições na API da SPTrans e no [bus-server](https://github.com/thiagommedeiros/bus-server), um serviço complementar da biblioteca que está hospedado no **heroku** e responde com os dados dos arquivos GTFS. O **bus-server** também é um auxiliar para requisições feitas pelo browser, dado que a API da SPTrans não oferece suporte a especificação CORS. Isso permite a biblioteca funcionar tanto no *client-side* quanto no *server-side*.
 
 
 ## Como utilizar
