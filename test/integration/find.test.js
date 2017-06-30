@@ -1,12 +1,12 @@
 import test from 'ava'
-import sptrans from '../../src'
+import bus from '../../src'
 
 // token livre para testes
 const TOKEN = '1e7c20905fe86990c5227e7e9f00002fe908d4d4dd4d7c0091032dacd2d0e07d'
 
 test('when find "linhas" with "termosBusca" should return the expected keys', async t => {
-  const auth = await sptrans.auth(TOKEN)
-  const response = await sptrans.find({
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
     auth,
     tipo: 'linhas',
     termosBusca: 'Sta. Mônica'
@@ -28,8 +28,8 @@ test('when find "linhas" with "termosBusca" should return the expected keys', as
 })
 
 test('when find "linhas" with "termosBusca" equal "*" should return the expected keys', async t => {
-  const auth = await sptrans.auth(TOKEN)
-  const response = await sptrans.find({
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
     auth,
     tipo: 'linhas',
     termosBusca: '*'
@@ -41,15 +41,16 @@ test('when find "linhas" with "termosBusca" equal "*" should return the expected
     'trip_id',
     'trip_headsign',
     'direction_id',
-    'shape_id'
+    'shape_id',
+    ''
   ]
   t.deepEqual(responseKeys, expectedKeys)
   t.true(response instanceof Array)
 })
 
 test('when find "trajeto" should return the expected keys', async t => {
-  const auth = await sptrans.auth(TOKEN)
-  const response = await sptrans.find({
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
     auth,
     tipo: 'trajeto',
     codigoTrajeto: 63468
@@ -60,15 +61,16 @@ test('when find "trajeto" should return the expected keys', async t => {
     'shape_pt_lat',
     'shape_pt_lon',
     'shape_pt_sequence',
-    'shape_dist_traveled'
+    'shape_dist_traveled',
+    ''
   ]
   t.deepEqual(responseKeys, expectedKeys)
   t.true(response instanceof Array)
 })
 
 test('when find "paradas" as string should return the expected keys', async t => {
-  const auth = await sptrans.auth(TOKEN)
-  const response = await sptrans.find({
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
     auth,
     tipo: 'paradas',
     termosBusca: 'Av. Paulista'
@@ -86,8 +88,8 @@ test('when find "paradas" as string should return the expected keys', async t =>
 })
 
 test('when find "paradas" as array should return the expected keys', async t => {
-  const auth = await sptrans.auth(TOKEN)
-  const response = await sptrans.find({
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
     auth,
     tipo: 'paradas',
     termosBusca: ['Av. Paulista', 'Av. Mutinga', 'Av. Faria Lima']
@@ -105,8 +107,8 @@ test('when find "paradas" as array should return the expected keys', async t => 
 })
 
 test('when find "paradasPorLinha" as integer should return the expected keys', async t => {
-  const auth = await sptrans.auth(TOKEN)
-  const response = await sptrans.find({
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
     auth,
     tipo: 'paradasPorLinha',
     codigoLinha: 34041
@@ -124,8 +126,8 @@ test('when find "paradasPorLinha" as integer should return the expected keys', a
 })
 
 test('when find "paradasPorLinha" as array should return the expected keys', async t => {
-  const auth = await sptrans.auth(TOKEN)
-  const response = await sptrans.find({
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
     auth,
     tipo: 'paradasPorLinha',
     codigoLinha: [34041, 34042, 34043]
@@ -143,8 +145,8 @@ test('when find "paradasPorLinha" as array should return the expected keys', asy
 })
 
 test('when find "corredores" should return the expected keys', async t => {
-  const auth = await sptrans.auth(TOKEN)
-  const response = await sptrans.find({
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
     auth,
     tipo: 'corredores'
   })
@@ -159,8 +161,8 @@ test('when find "corredores" should return the expected keys', async t => {
 })
 
 test('when find "paradasPorCorredor" as integer should return the expected keys', async t => {
-  const auth = await sptrans.auth(TOKEN)
-  const response = await sptrans.find({
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
     auth,
     tipo: 'paradasPorCorredor',
     codigoCorredor: 8
@@ -178,8 +180,8 @@ test('when find "paradasPorCorredor" as integer should return the expected keys'
 })
 
 test('when find "paradasPorCorredor" as array should return the expected keys', async t => {
-  const auth = await sptrans.auth(TOKEN)
-  const response = await sptrans.find({
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
     auth,
     tipo: 'paradasPorCorredor',
     codigoCorredor: [8, 9]
@@ -197,8 +199,8 @@ test('when find "paradasPorCorredor" as array should return the expected keys', 
 })
 
 test('when find "posicaoVeiculos" should return the expected keys', async t => {
-  const auth = await sptrans.auth(TOKEN)
-  const response = await sptrans.find({
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
     auth,
     tipo: 'posicaoVeiculos',
     codigoLinha: 34041
@@ -213,8 +215,8 @@ test('when find "posicaoVeiculos" should return the expected keys', async t => {
 })
 
 test('when find "posicaoVeiculos" should return the expected keys', async t => {
-  const auth = await sptrans.auth(TOKEN)
-  const response = await sptrans.find({
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
     auth,
     tipo: 'posicaoVeiculos',
     codigoLinha: [34041, 34042]
@@ -229,8 +231,8 @@ test('when find "posicaoVeiculos" should return the expected keys', async t => {
 })
 
 test('when find "previsaoChegada" should return the expected keys', async t => {
-  const auth = await sptrans.auth(TOKEN)
-  const response = await sptrans.find({
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
     auth,
     tipo: 'previsaoChegada',
     codigoParada: 260015039,
@@ -246,8 +248,8 @@ test('when find "previsaoChegada" should return the expected keys', async t => {
 })
 
 test('when find "previsaoLinha" as integer should return the expected keys', async t => {
-  const auth = await sptrans.auth(TOKEN)
-  const response = await sptrans.find({
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
     auth,
     tipo: 'previsaoLinha',
     codigoLinha: 34041
@@ -262,8 +264,8 @@ test('when find "previsaoLinha" as integer should return the expected keys', asy
 })
 
 test('when find "previsaoLinha" as array should return the expected keys', async t => {
-  const auth = await sptrans.auth(TOKEN)
-  const response = await sptrans.find({
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
     auth,
     tipo: 'previsaoLinha',
     codigoLinha: [34041, 34042]
@@ -278,8 +280,8 @@ test('when find "previsaoLinha" as array should return the expected keys', async
 })
 
 test('when find "previsaoParada" as integer should return the expected keys', async t => {
-  const auth = await sptrans.auth(TOKEN)
-  const response = await sptrans.find({
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
     auth,
     tipo: 'previsaoParada',
     codigoParada: 260015039
@@ -294,8 +296,8 @@ test('when find "previsaoParada" as integer should return the expected keys', as
 })
 
 test('when find "previsaoParada" as array should return the expected keys', async t => {
-  const auth = await sptrans.auth(TOKEN)
-  const response = await sptrans.find({
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
     auth,
     tipo: 'previsaoParada',
     codigoParada: [260015039, 260015038]

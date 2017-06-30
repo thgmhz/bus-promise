@@ -14,4 +14,4 @@
 
 ## Reportando Issues
 
-Se você encontrou bugs ou tem sugestões de melhorias, crie uma issue [aqui](https://github.com/thiagommedeiros/sptrans-promise/issues).
+Se você encontrou bugs ou tem sugestões de melhorias, crie uma issue [aqui](https://github.com/thiagommedeiros/bus-promise/issues).

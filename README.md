@@ -1,16 +1,16 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/thiagommedeiros/sptrans-promise/master/bus.gif"
+<img src="https://raw.githubusercontent.com/thiagommedeiros/bus-promise/master/bus.gif"
 </p>
-<h1 align="center">SPTrans Promise</h1>
+<h1 align="center">Bus Promise</h1>
 
 <p align="center">
-<a href="https://travis-ci.org/thiagommedeiros/sptrans-promise" target="_blank">
-<img src="https://travis-ci.org/thiagommedeiros/sptrans-promise.svg?branch=master">
+<a href="https://travis-ci.org/thiagommedeiros/bus-promise" target="_blank">
+<img src="https://travis-ci.org/thiagommedeiros/bus-promise.svg?branch=master">
 </a>
-<a href="https://www.npmjs.com/package/sptrans-promise" target="_blank">
-<img src="https://img.shields.io/npm/v/sptrans-promise.svg?style=flat-square">
+<a href="https://www.npmjs.com/package/bus-promise" target="_blank">
+<img src="https://img.shields.io/npm/v/bus-promise.svg?style=flat-square">
 </a>
-<a href="https://github.com/thiagommedeiros/sptrans-promise/blob/master/LICENSE" target="_blank">
+<a href="https://github.com/thiagommedeiros/bus-promise/blob/master/LICENSE" target="_blank">
 <img src="https://img.shields.io/github/license/mashape/apistatus.svg">
 </a>
 </p>
@@ -20,23 +20,26 @@ Busca informações em tempo real da frota de ônibus da SPTrans na cidade de S�
 </p>
 
 ## Sobre
-O **sptrans-promise** é uma biblioteca *Javascript (client-side e server-side)* feita para facilitar o acesso a API da SPTrans que disponibiliza dados em tempo real da frota de ônibus da cidade de São Paulo.
+A SPtrans disponibiliza uma API para consulta de alguns dados, porém outros dados estão disponíveis somente em arquivos `.csv` que seguem a especificação GTFS (General Transit Feed Specification). O **bus-promise** é uma biblioteca *Javascript (client-side e server-side)* feita para facilitar o uso da API e dos arquivos GTFS da SPTrans.
+
+## Como funciona
+O **bus-promise** faz requisições na API da SPTrans e no [bus-server](https://github.com/thiagommedeiros/bus-server), um serviço complementar da biblioteca que está hospedado no **heroku** e responde com os dados dos arquivos GTFS. O **bus-server** também é um auxiliar para requisições feitas pelo browser, dado que a API da SPTrans não oferece suporte a especificação CORS. Isso permite a biblioteca funcionar tanto no *client-side* quanto no *server-side*.
 
 
 ## Como utilizar
 
 ### Instalação
 ``` bash
-$ npm install --save sptrans-promise
+$ npm install --save bus-promise
 ```
 
 ##### Node.js
 ``` js
-import sptrans from 'sptrans-promise'
+import bus from 'bus-promise'
 ```
 
 ##### Browser
-Você pode instalar o **sptrans-promise** via `npm`. Ou se preferir pode copiar o script [clicando aqui](https://github.com/thiagommedeiros/sptrans-promise/blob/master/build/browser/sptrans-promise.min.js). Os métodos estarão acessíveis através da variável global `sptrans`.
+Você pode instalar o **bus-promise** via `npm`. Ou se preferir pode copiar o script [clicando aqui](https://github.com/thiagommedeiros/bus-promise/blob/master/build/browser/bus-promise.min.js). Os métodos estarão acessíveis através da variável global `bus`.
 
 ### Token
 
@@ -44,11 +47,11 @@ A API da SPTrans exige autenticação com um `token` que você pode obter ao  se
 
 ## Autenticação
 O método `auth()` recebe um `token` e retorna uma `Promise` com as `credentials`.
- 
-``` js
-import sptrans from 'sptrans-promise'
 
-sptrans.auth('SEU_TOKEN_AQUI')
+``` js
+import bus from 'bus-promise'
+
+bus.auth('SEU_TOKEN_AQUI')
   .then(console.log)
 ```
 
@@ -72,13 +75,13 @@ O tipo `linhas` possibilita a consulta pelas linhas de ônibus da cidade de São
 
 Aceita o nome da linha ou letreiro. O valor deve ser passado pelo parâmetro `termosBusca` como uma `string`:
 ``` js
-import sptrans from 'sptrans-promise'
+import bus from 'bus-promise'
 
-sptrans.auth('SEU_TOKEN_AQUI')
+bus.auth('SEU_TOKEN_AQUI')
   .then(encontrarLinhas)
 
 function encontrarLinhas (auth) {
-  sptrans.find({
+  bus.find({
     auth,
     tipo: 'linhas',
     termosBusca: 'Term. Lapa'
@@ -102,7 +105,7 @@ function encontrarLinhas (auth) {
 Para obter todas as linhas:
 
 ``` js
-sptrans.find({
+bus.find({
   auth,
   tipo: 'linhas',
   termosBusca: '*'
@@ -115,7 +118,7 @@ O tipo `trajeto` retorna uma lista com a latitude e longitude de cada rua que o 
 Aceita o código do trajeto. O valor deve ser passado pelo parâmetro `codigoTrajeto` como `number`:
 
 ``` js
-sptrans.find({
+bus.find({
   auth,
   tipo: 'trajeto',
   codigoTrajeto: 63468
@@ -139,14 +142,14 @@ Aceita o nome da parada ou o endereço de localização. O valor deve ser passad
 
 ``` js
 //passando string
-sptrans.find({
+bus.find({
   auth,
   tipo: 'paradas',
   termosBusca: 'Av. Mutinga'
 }).then(console.log)
 
 //passando array
-sptrans.find({
+bus.find({
   auth,
   tipo: 'paradas',
   termosBusca: ['Av. Mutinga', 'Av. Faria Lima', 'Av. Paulista']
@@ -170,14 +173,14 @@ Aceita o código da linha. O valor deve ser passado pelo parâmetro `codigoLinha
 
 ``` js
 //passando number
-sptrans.find({
+bus.find({
   auth,
   tipo: 'paradasPorLinha',
   codigoLinha: 34041
 }).then(console.log)
 
 //passando array
-sptrans.find({
+bus.find({
   auth,
   tipo: 'paradas',
   codigoLinha: [34041, 34042, 34043]
@@ -199,7 +202,7 @@ sptrans.find({
 O tipo `corredores` realiza uma busca por todos os corredores de ônibus da cidade de São Paulo.
 
 ``` js
-sptrans.find({
+bus.find({
   auth,
   tipo: 'corredores'    
 }).then(console.log)
@@ -220,14 +223,14 @@ Aceita o código do corredor. O valor deve ser passado pelo parâmetro `codigoCo
 
 ``` js
 //passando number
-sptrans.find({
+bus.find({
   auth,
   tipo: 'paradasPorCorredor',
   codigoCorredor: 8
 }).then(console.log)
 
 //passando array
-sptrans.find({
+bus.find({
   auth,
   tipo: 'paradasPorCorredor',
   codigoCorredor: [8, 9]
@@ -251,14 +254,14 @@ Aceita o código da linha. O valor deve ser passado pelo parâmetro `codigoLinha
 
 ``` js
 //passando number
-sptrans.find({
+bus.find({
   auth,
   tipo: 'posicaoVeiculos',
   codigoLinha: 34041
 }).then(console.log)
 
 //passando array
-sptrans.find({
+bus.find({
   auth,
   tipo: 'posicaoVeiculos',
   codigoLinha: [34041, 34042]
@@ -271,7 +274,7 @@ O tipo `previsaoChegada` retorna a previsão de chegada de cada veículo de uma 
 Aceita o código da parada e o código da linha. O valor deve ser passado pelos parâmetros `codigoParada` e `codigoLinha` como um `number`:
 
 ``` js
-sptrans.find({
+bus.find({
   auth,
   tipo: 'previsaoChegada',
   codigoParada: 260015039,
@@ -285,14 +288,14 @@ Aceita o código da linha. O valor deve ser passado pelo parâmetro `codigoLinha
 
 ``` js
 //passando number
-sptrans.find({
+bus.find({
   auth,
   tipo: 'previsaoLinha',
   codigoLinha: 34041
 }).then(console.log)
 
 //passando array
-sptrans.find({
+bus.find({
   auth,
   tipo: 'previsaoLinha',
   codigoLinha: [34041, 34042]
@@ -305,14 +308,14 @@ Aceita o código da parada. O valor deve ser passado pelo parâmetro `codigoPara
 
 ``` js
 //passando number
-sptrans.find({
+bus.find({
   auth,
   tipo: 'previsaoParada',
   codigoParada: 260015039
 }).then(console.log)
 
 //passando array
-sptrans.find({
+bus.find({
   auth,
   tipo: 'previsaoParada',
   codigoParada: [260015039, 260015038]
@@ -320,10 +323,10 @@ sptrans.find({
 ```
 
 ## Como contribuir
-Para contribuir com o projeto, [clique aqui](https://github.com/thiagommedeiros/sptrans-promise/blob/master/CONTRIBUTING.md).
+Para contribuir com o projeto, [clique aqui](https://github.com/thiagommedeiros/bus-promise/blob/master/CONTRIBUTING.md).
 
 ## Changelog
-Para verificar o changelog, [clique aqui](https://github.com/thiagommedeiros/sptrans-promise/blob/master/CHANGELOG.md).
+Para verificar o changelog, [clique aqui](https://github.com/thiagommedeiros/bus-promise/blob/master/CHANGELOG.md).
 
 ## Autor
 
