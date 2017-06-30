@@ -26,7 +26,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = function () {
   var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(linhas) {
-    var buildPromise, getShapesIds, tripsIds, shapesIds, response;
+    var buildPromise, parseShapeId, getShapesIds, tripsIds, shapesIds, response;
     return _regenerator2.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -38,22 +38,25 @@ exports.default = function () {
               });
             };
 
+            parseShapeId = function parseShapeId(res) {
+              return res.map(function (item) {
+                if (item.data[0]) return item.data[0].shape_id;
+                return null;
+              });
+            };
+
             getShapesIds = function getShapesIds(tripsIds) {
               var promises = tripsIds.map(buildPromise);
-              return _promise2.default.all(promises).then(function (res) {
-                return res.map(function (item) {
-                  return item.data[0].shape_id;
-                });
-              });
+              return _promise2.default.all(promises).then(parseShapeId);
             };
 
             tripsIds = linhas.map(function (item) {
               return item.Letreiro + '-' + item.Tipo + '-' + (item.Sentido - 1);
             });
-            _context.next = 5;
+            _context.next = 6;
             return getShapesIds(tripsIds);
 
-          case 5:
+          case 6:
             shapesIds = _context.sent;
             response = linhas.map(function (item, key) {
               return {
@@ -70,7 +73,7 @@ exports.default = function () {
             });
             return _context.abrupt('return', response);
 
-          case 8:
+          case 9:
           case 'end':
             return _context.stop();
         }

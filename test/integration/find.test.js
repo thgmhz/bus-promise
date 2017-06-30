@@ -41,7 +41,8 @@ test('when find "linhas" with "termosBusca" equal "*" should return the expected
     'trip_id',
     'trip_headsign',
     'direction_id',
-    'shape_id'
+    'shape_id',
+    ''
   ]
   t.deepEqual(responseKeys, expectedKeys)
   t.true(response instanceof Array)
@@ -60,7 +61,8 @@ test('when find "trajeto" should return the expected keys', async t => {
     'shape_pt_lat',
     'shape_pt_lon',
     'shape_pt_sequence',
-    'shape_dist_traveled'
+    'shape_dist_traveled',
+    ''
   ]
   t.deepEqual(responseKeys, expectedKeys)
   t.true(response instanceof Array)

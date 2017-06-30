@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
   localhost: 'http://localhost:8888',
   sptrans: 'http://api.olhovivo.sptrans.com.br/v0',
-  server: 'https://sptrans-server.herokuapp.com',
+  server: 'https://busserver.herokuapp.com',
   auth: {
     route: '/login/autenticar',
     required: ['token']
