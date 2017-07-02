@@ -4,7 +4,7 @@ import bus from '../../src'
 // token for tests
 const TOKEN = '2d5a4ee1443cb4047633305bf371c72213f6c3aefc9fe3362e42bccb3c01ebf4'
 
-test('when find "linhas" with "termosBusca" should return the expected keys', async t => {
+test('when finding "lines" should return the expected keys', async t => {
   const auth = await bus.auth(TOKEN)
   const response = await bus.find({
     auth,
@@ -27,7 +27,7 @@ test('when find "linhas" with "termosBusca" should return the expected keys', as
   t.true(response instanceof Array)
 })
 
-test('when find "linhas" with "termosBusca" equal "*" should return the expected keys', async t => {
+test('when finding "shapes" should return the expected keys', async t => {
   const auth = await bus.auth(TOKEN)
   const response = await bus.find({
     auth,
@@ -48,7 +48,7 @@ test('when find "linhas" with "termosBusca" equal "*" should return the expected
   t.true(response instanceof Array)
 })
 
-test('when find "trajeto" should return the expected keys', async t => {
+test('when finding "stops" should return the expected keys', async t => {
   const auth = await bus.auth(TOKEN)
   const response = await bus.find({
     auth,
@@ -68,7 +68,7 @@ test('when find "trajeto" should return the expected keys', async t => {
   t.true(response instanceof Array)
 })
 
-test('when find "paradas" as string should return the expected keys', async t => {
+test('when finding "stopsByLine" should return the expected keys', async t => {
   const auth = await bus.auth(TOKEN)
   const response = await bus.find({
     auth,
@@ -87,7 +87,7 @@ test('when find "paradas" as string should return the expected keys', async t =>
   t.true(response instanceof Array)
 })
 
-test('when find "paradas" as array should return the expected keys', async t => {
+test('when finding "corridors" should return the expected keys', async t => {
   const auth = await bus.auth(TOKEN)
   const response = await bus.find({
     auth,
@@ -125,7 +125,7 @@ test('when find "paradasPorLinha" as integer should return the expected keys', a
   t.true(response instanceof Array)
 })
 
-test('when find "paradasPorLinha" as array should return the expected keys', async t => {
+test('when finding "stopsByCorridor" should return the expected keys', async t => {
   const auth = await bus.auth(TOKEN)
   const response = await bus.find({
     auth,
@@ -198,7 +198,7 @@ test('when find "paradasPorCorredor" as array should return the expected keys', 
   t.true(response instanceof Array)
 })
 
-test('when find "posicaoVeiculos" should return the expected keys', async t => {
+test('when finding "vehiclesPosition" should return the expected keys', async t => {
   const auth = await bus.auth(TOKEN)
   const response = await bus.find({
     auth,
@@ -214,7 +214,7 @@ test('when find "posicaoVeiculos" should return the expected keys', async t => {
   t.true(response instanceof Object)
 })
 
-test('when find "posicaoVeiculos" should return the expected keys', async t => {
+test('when finding "arrivalForecast" should return the expected keys', async t => {
   const auth = await bus.auth(TOKEN)
   const response = await bus.find({
     auth,
@@ -247,7 +247,7 @@ test('when find "previsaoChegada" should return the expected keys', async t => {
   t.true(response instanceof Object)
 })
 
-test('when find "previsaoLinha" as integer should return the expected keys', async t => {
+test('when find "lineForecast" should return the expected keys', async t => {
   const auth = await bus.auth(TOKEN)
   const response = await bus.find({
     auth,
@@ -263,7 +263,7 @@ test('when find "previsaoLinha" as integer should return the expected keys', asy
   t.true(response instanceof Object)
 })
 
-test('when find "previsaoLinha" as array should return the expected keys', async t => {
+test('when find "stopForecast" should return the expected keys', async t => {
   const auth = await bus.auth(TOKEN)
   const response = await bus.find({
     auth,

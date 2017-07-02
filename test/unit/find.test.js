@@ -8,19 +8,19 @@ test('bus should has the find method', t => {
   t.is(typeof bus.find, 'function')
 })
 
-test('when send no param should return error', async t => {
+test('when sending no param should return error', async t => {
   await bus.find().catch(err => {
     t.is(err.message, 'The "find" method should receive an object with options.')
   })
 })
 
-test('when send no auth param should return error', async t => {
+test('when sending no auth param should return error', async t => {
   await bus.find({ auth: '' }).catch(err => {
     t.is(err.message, 'The "find" method should receive the "auth" parameter.')
   })
 })
 
-test('when send a not allowed param should return error', async t => {
+test('when sending a not allowed param should return error', async t => {
   const auth = bus.auth(TOKEN)
   await bus.find({
     auth,
@@ -30,7 +30,7 @@ test('when send a not allowed param should return error', async t => {
   })
 })
 
-test('when send no termosBusca to paradas should return error', async t => {
+test('when sending no terms to stops should return error', async t => {
   const auth = bus.auth(TOKEN)
   await bus.find({
     auth,
@@ -40,7 +40,7 @@ test('when send no termosBusca to paradas should return error', async t => {
   })
 })
 
-test('when send no codigoLinha to paradasPorLinha should return error', async t => {
+test('when sending no lineId to stopsByLine should return error', async t => {
   const auth = bus.auth(TOKEN)
   await bus.find({
     auth,
@@ -50,7 +50,7 @@ test('when send no codigoLinha to paradasPorLinha should return error', async t 
   })
 })
 
-test('when send no codigoCorredor to paradasPorCorredor should return error', async t => {
+test('when sending no corridorId to stopsByCorridor should return error', async t => {
   const auth = bus.auth(TOKEN)
   await bus.find({
     auth,
@@ -60,7 +60,7 @@ test('when send no codigoCorredor to paradasPorCorredor should return error', as
   })
 })
 
-test('when send no codigoLinha to posicaoVeiculos should return error', async t => {
+test('when sending no lineId to vehiclesPosition should return error', async t => {
   const auth = bus.auth(TOKEN)
   await bus.find({
     auth,
@@ -70,7 +70,7 @@ test('when send no codigoLinha to posicaoVeiculos should return error', async t 
   })
 })
 
-test('when send no param value to previsaoChegada should return error', async t => {
+test('when sending no param value to arrivalForecast should return error', async t => {
   const auth = bus.auth(TOKEN)
   await bus.find({
     auth,
@@ -80,7 +80,7 @@ test('when send no param value to previsaoChegada should return error', async t 
   })
 })
 
-test('when send no codigoLinha to previsaoLinha should return error', async t => {
+test('when sending no lineId to lineForecast should return error', async t => {
   const auth = bus.auth(TOKEN)
   await bus.find({
     auth,
@@ -90,7 +90,7 @@ test('when send no codigoLinha to previsaoLinha should return error', async t =>
   })
 })
 
-test('when send no codigoParada to previsaoLinha should return error', async t => {
+test('when sending no stopId to stopForecast should return error', async t => {
   const auth = bus.auth(TOKEN)
   await bus.find({
     auth,
