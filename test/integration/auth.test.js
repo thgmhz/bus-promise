@@ -1,8 +1,8 @@
 import test from 'ava'
 import bus from '../../src'
 
-// token livre para testes
-const TOKEN = '1e7c20905fe86990c5227e7e9f00002fe908d4d4dd4d7c0091032dacd2d0e07d'
+// token for tests
+const TOKEN = '2d5a4ee1443cb4047633305bf371c72213f6c3aefc9fe3362e42bccb3c01ebf4'
 
 test('when authenticate should return credentials', async t => {
   const auth = await bus.auth(TOKEN)
