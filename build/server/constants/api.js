@@ -5,49 +5,77 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
   localhost: 'http://localhost:8888',
-  sptrans: 'http://api.olhovivo.sptrans.com.br/v0',
+  sptrans: 'http://api.olhovivo.sptrans.com.br/v2.1',
   server: 'https://busserver.herokuapp.com',
   auth: {
     route: '/login/autenticar',
     required: ['token']
   },
-  linhas: {
+  lines: {
     route: '/linha/buscar',
-    required: ['termosBusca']
+    required: ['terms'],
+    proxyParams: {
+      terms: 'termosBusca'
+    }
   },
-  trajeto: {
+  shapes: {
     route: '/shapes',
-    required: ['codigoTrajeto']
+    required: ['shapeId'],
+    proxyParams: {
+      shapeId: 'codigoTrajeto'
+    }
   },
-  paradas: {
+  stops: {
     route: '/parada/buscar',
-    required: ['termosBusca']
+    required: ['terms'],
+    proxyParams: {
+      terms: 'termosBusca'
+    }
   },
-  paradasPorLinha: {
+  stopsByLine: {
     route: '/parada/buscarParadasPorLinha',
-    required: ['codigoLinha']
+    required: ['lineId'],
+    proxyParams: {
+      lineId: 'codigoLinha'
+    }
   },
-  corredores: {
+  corridors: {
     route: '/corredor'
   },
-  paradasPorCorredor: {
+  stopsByCorridor: {
     route: '/parada/buscarParadasPorCorredor',
-    required: ['codigoCorredor']
+    required: ['corridorId'],
+    proxyParams: {
+      corridorId: 'codigoCorredor'
+    }
   },
-  posicaoVeiculos: {
+  vehiclesPosition: {
     route: '/posicao',
-    required: ['codigoLinha']
+    required: ['lineId'],
+    proxyParams: {
+      lineId: 'codigoLinha'
+    }
   },
-  previsaoChegada: {
+  arrivalForecast: {
     route: '/previsao',
-    required: ['codigoParada', 'codigoLinha']
+    required: ['stopId', 'lineId'],
+    proxyParams: {
+      stopId: 'codigoParada',
+      lineId: 'codigoLinha'
+    }
   },
-  previsaoLinha: {
+  lineForecast: {
     route: '/previsao/linha',
-    required: ['codigoLinha']
+    required: ['lineId'],
+    proxyParams: {
+      lineId: 'codigoLinha'
+    }
   },
-  previsaoParada: {
+  stopForecast: {
     route: '/previsao/parada',
-    required: ['codigoParada']
+    required: ['stopId'],
+    proxyParams: {
+      stopId: 'codigoParada'
+    }
   }
 };
