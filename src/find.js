@@ -9,17 +9,17 @@ function handleError (err) {
 }
 
 function hasOptions (options) {
-  options || handleError('O método "find" deve receber um objeto com opções.')
+  options || handleError('The "find" method should receive an object with options.')
   return options
 }
 
 function hasAuth (options) {
-  options.auth || handleError('O método "find" deve receber o parâmetro "auth".')
+  options.auth || handleError('The "find" method should receive the "auth" parameter.')
   return options
 }
 
 function isAllowedType (options) {
-  options.tipo in API || handleError(`O "tipo" "${options.tipo}" não existe.`)
+  options.type in API || handleError(`The "${options.type}" type does not exist.`)
   return options
 }
 
@@ -27,9 +27,9 @@ function hasRequiredParams (options) {
   const requiredParams = API[options.tipo].required
   if (!requiredParams) return options
 
-  const checkParam = param => !(param in options)
-  const missingParams = requiredParams.filter(checkParam)
-  missingParams.length === 0 || handleError(`Parâmetro(s) obrigatório(s): "${missingParams}".`)
+  const optionsHasParam = param => !(param in options)
+  const missingParams = requiredParams.filter(optionsHasParam)
+  missingParams.length === 0 || handleError(`Required parameter(s): "${missingParams}".`)
 
   return options
 }
@@ -52,7 +52,7 @@ function buildParams (options) {
 }
 
 function validateHttpStatus (res) {
-  res.status === 200 || handleError(`Erro ${res.status} ao se conectar com o serviço da SPTrans.`)
+  res.status === 200 || handleError(`Error ${res.status} when connecting to the SPTrans service.`)
   return res
 }
 
