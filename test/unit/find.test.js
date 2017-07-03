@@ -1,101 +1,101 @@
 import test from 'ava'
 import bus from '../../src'
 
-// token livre para testes
-const TOKEN = '1e7c20905fe86990c5227e7e9f00002fe908d4d4dd4d7c0091032dacd2d0e07d'
+// token for tests
+const TOKEN = '2d5a4ee1443cb4047633305bf371c72213f6c3aefc9fe3362e42bccb3c01ebf4'
 
 test('bus should has the find method', t => {
   t.is(typeof bus.find, 'function')
 })
 
-test('when send no param should return error', async t => {
+test('when sending no param should return error', async t => {
   await bus.find().catch(err => {
-    t.is(err.message, 'O método "find" deve receber um objeto com opções.')
+    t.is(err.message, 'The "find" method should receive an object with options.')
   })
 })
 
-test('when send no auth param should return error', async t => {
+test('when sending no auth param should return error', async t => {
   await bus.find({ auth: '' }).catch(err => {
-    t.is(err.message, 'O método "find" deve receber o parâmetro "auth".')
+    t.is(err.message, 'The "find" method should receive the "auth" parameter.')
   })
 })
 
-test('when send a not allowed param should return error', async t => {
+test('when sending a not allowed param should return error', async t => {
   const auth = bus.auth(TOKEN)
   await bus.find({
     auth,
-    tipo: 'not-allowed'
+    type: 'not-allowed'
   }).catch(err => {
-    t.is(err.message, 'O "tipo" "not-allowed" não existe.')
+    t.is(err.message, 'The "not-allowed" type does not exist.')
   })
 })
 
-test('when send no termosBusca to paradas should return error', async t => {
+test('when sending no terms to stops should return error', async t => {
   const auth = bus.auth(TOKEN)
   await bus.find({
     auth,
-    tipo: 'paradas'
+    type: 'stops'
   }).catch(err => {
-    t.is(err.message, 'Parâmetro(s) obrigatório(s): "termosBusca".')
+    t.is(err.message, 'Required parameter(s): "terms".')
   })
 })
 
-test('when send no codigoLinha to paradasPorLinha should return error', async t => {
+test('when sending no lineId to stopsByLine should return error', async t => {
   const auth = bus.auth(TOKEN)
   await bus.find({
     auth,
-    tipo: 'paradasPorLinha'
+    type: 'stopsByLine'
   }).catch(err => {
-    t.is(err.message, 'Parâmetro(s) obrigatório(s): "codigoLinha".')
+    t.is(err.message, 'Required parameter(s): "lineId".')
   })
 })
 
-test('when send no codigoCorredor to paradasPorCorredor should return error', async t => {
+test('when sending no corridorId to stopsByCorridor should return error', async t => {
   const auth = bus.auth(TOKEN)
   await bus.find({
     auth,
-    tipo: 'paradasPorCorredor'
+    type: 'stopsByCorridor'
   }).catch(err => {
-    t.is(err.message, 'Parâmetro(s) obrigatório(s): "codigoCorredor".')
+    t.is(err.message, 'Required parameter(s): "corridorId".')
   })
 })
 
-test('when send no codigoLinha to posicaoVeiculos should return error', async t => {
+test('when sending no lineId to vehiclesPosition should return error', async t => {
   const auth = bus.auth(TOKEN)
   await bus.find({
     auth,
-    tipo: 'posicaoVeiculos'
+    type: 'vehiclesPosition'
   }).catch(err => {
-    t.is(err.message, 'Parâmetro(s) obrigatório(s): "codigoLinha".')
+    t.is(err.message, 'Required parameter(s): "lineId".')
   })
 })
 
-test('when send no param value to previsaoChegada should return error', async t => {
+test('when sending no param value to arrivalForecast should return error', async t => {
   const auth = bus.auth(TOKEN)
   await bus.find({
     auth,
-    tipo: 'previsaoChegada'
+    type: 'arrivalForecast'
   }).catch(err => {
-    t.is(err.message, 'Parâmetro(s) obrigatório(s): "codigoParada,codigoLinha".')
+    t.is(err.message, 'Required parameter(s): "stopId,lineId".')
   })
 })
 
-test('when send no codigoLinha to previsaoLinha should return error', async t => {
+test('when sending no lineId to lineForecast should return error', async t => {
   const auth = bus.auth(TOKEN)
   await bus.find({
     auth,
-    tipo: 'previsaoLinha'
+    type: 'lineForecast'
   }).catch(err => {
-    t.is(err.message, 'Parâmetro(s) obrigatório(s): "codigoLinha".')
+    t.is(err.message, 'Required parameter(s): "lineId".')
   })
 })
 
-test('when send no codigoParada to previsaoLinha should return error', async t => {
+test('when sending no stopId to stopForecast should return error', async t => {
   const auth = bus.auth(TOKEN)
   await bus.find({
     auth,
-    tipo: 'previsaoParada'
+    type: 'stopForecast'
   }).catch(err => {
-    t.is(err.message, 'Parâmetro(s) obrigatório(s): "codigoParada".')
+    t.is(err.message, 'Required parameter(s): "stopId".')
   })
 })

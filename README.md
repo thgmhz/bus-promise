@@ -23,7 +23,7 @@ Busca informações em tempo real da frota de ônibus da SPTrans na cidade de S�
 A SPtrans disponibiliza uma API para consulta de alguns dados, porém outros dados estão disponíveis somente em arquivos `.csv` que seguem a especificação GTFS (General Transit Feed Specification). O **bus-promise** é uma biblioteca *Javascript (client-side e server-side)* feita para facilitar o uso da API e dos arquivos GTFS da SPTrans.
 
 ## Como funciona
-O **bus-promise** faz requisições na API da SPTrans e no [bus-server](https://github.com/thiagommedeiros/bus-server), um serviço complementar da biblioteca que está hospedado no **heroku** e responde com os dados dos arquivos GTFS. O **bus-server** também é um auxiliar para requisições feitas pelo browser, dado que a API da SPTrans não oferece suporte a especificação CORS. Isso permite a biblioteca funcionar tanto no *client-side* quanto no *server-side*.
+O **bus-promise** faz requisições na API da SPTrans e no [bus-server](https://github.com/thiagommedeiros/bus-server), um serviço complementar da biblioteca que está hospedado no **heroku** e responde com os dados dos arquivos GTFS. Dado que a API da SPTrans não oferece suporte a especificação CORS, o **bus-server** também é um auxiliar para requisições feitas pelo browser. Isso permite a biblioteca funcionar tanto no *client-side* quanto no *server-side*.
 
 
 ## Como utilizar
@@ -59,274 +59,305 @@ bus.auth('SEU_TOKEN_AQUI')
 
 Este é o principal método da biblioteca, você deve usá-lo para realizar buscas pelos seguintes tipos de dados:
 
-- [Linhas](#linhas)
-- [Trajeto](#trajeto)
-- [Paradas](#paradas)
-- [Paradas por linha](#paradas-por-linha)
-- [Corredores](#corredores)
-- [Paradas por corredor](#paradas-por-corredor)
-- [Posição dos veículos](#posição-dos-veículos)
-- [Previsão de chegada](#previsão-de-chegada)
-- [Previsão da linha](#previsão-da-linha)
-- [Previsão da parada](#previsão-da-parada)
+- [Linhas (lines)](#linhas-lines)
+- [Trajetos (shapes)](#trajetos-shapes)
+- [Paradas (stops)](#paradas-stops)
+- [Paradas por linha (stopsByLine)](#paradas-por-linha-stopsbylines)
+- [Corredores (corridors)](#corredores-corridors)
+- [Paradas por corredor (stopsByCorridor)](#paradas-por-corredor-stopsbycorridor)
+- [Posição dos veículos (vehiclesPosition)](#posição-dos-veículos-vehiclesposition)
+- [Previsão de chegada (arrivalForecast)](#previsão-de-chegada-arrivalforecast)
+- [Previsão da linha (lineForecast)](#previsão-da-linha-lineforecast)
+- [Previsão da parada (stopForecast)](#previsão-da-parada-stopforecast)
 
-#### Linhas
-O tipo `linhas` possibilita a consulta pelas linhas de ônibus da cidade de São Paulo.
+#### Linhas (lines)
+O tipo `lines` possibilita a consulta pelas linhas de ônibus da cidade de São Paulo.
 
-Aceita o nome da linha ou letreiro. O valor deve ser passado pelo parâmetro `termosBusca` como uma `string`:
+Aceita o nome da linha ou letreiro `displaySign`.
+O valor deve ser passado pelo parâmetro `terms` como `string`:
 ``` js
 import bus from 'bus-promise'
 
 bus.auth('SEU_TOKEN_AQUI')
-  .then(encontrarLinhas)
+  .then(getLines)
 
-function encontrarLinhas (auth) {
+function getLines (auth) {
   bus.find({
     auth,
-    tipo: 'linhas',
-    termosBusca: 'Term. Lapa'
+    type: 'lines',
+    terms: 'Term. Lapa'
   }).then(console.log)
 }
 ```
-##### Exemplo de resposta
-``` js
-[{
-    CodigoLinha: 34022,
-    CodigoTrajeto: 63468,
-    Circular: false,
-    Letreiro: '8004',
-    Sentido: 2,
-    Tipo: 10,
-    DenominacaoTPTS: 'TERM. LAPA',
-    DenominacaoTSTP: 'STA. MÔNICA',
-    Informacoes: null
-}]
-```
-Para obter todas as linhas:
+Para obter todas as linhas disponíveis:
 
 ``` js
 bus.find({
   auth,
-  tipo: 'linhas',
-  termosBusca: '*'
+  type: 'lines',
+  terms: '*'
 }).then(console.log)
 ```
+##### Resposta
 
-#### Trajeto
-O tipo `trajeto` retorna uma lista com a latitude e longitude de cada rua que o ônibus passa.
+| Atributo | Tipo | Descrição |
+| ---- | ---- | ---- |
+| `lineId` | *integer* | Código identificador da linha. Este é um código identificador único de cada linha do sistema (por sentido de operação).
+| `shapeId` | *integer* | Código identificador do trajeto. Este código deve ser usado para consultar o trajeto completo do ônibus através do tipo `shapes`.
+| `circular` | *bool* |  Indica se uma linha opera no modo circular (sem um terminal secundário).
+| `displaySign` | *string* | A primeira parte do letreiro numérico da linha.
+| `direction` | *int* | A segunda parte do letreiro numérico da linha, que indica se a linha opera nos modos: *base (10), atendimento (21, 23, 32, 41)*.
+| `type` | *int* | O sentido ao qual a linha atende, onde 1 significa do Terminal Principal (mainDestination) para Terminal Secundário (secondaryDestination) e 2 do Terminal Secundário para Terminal Principal.
+| `mainTerminal` | *string* | O letreiro descritivo da linha no sentido Terminal Principal para Terminal Secundário.
+| `secondaryTerminal` | *string* | O letreiro descritivo da linha no sentido Terminal Secundário para Terminal Principal.
 
-Aceita o código do trajeto. O valor deve ser passado pelo parâmetro `codigoTrajeto` como `number`:
+
+#### Trajeto (shapes)
+O tipo `shapes` retorna uma lista com a latitude e longitude de cada rua do trajeto do ônibus.
+
+Aceita o código do trajeto. O valor deve ser passado pelo parâmetro `shapeId` como `integer`:
 
 ``` js
 bus.find({
   auth,
-  tipo: 'trajeto',
-  codigoTrajeto: 63468
+  type: 'shapes',
+  shapeId: 63468
 }).then(console.log)
 ```
-##### Exemplo de resposta
-``` js
-[{
-    shape_id: '63468',
-    shape_pt_lat: '-23.516524',
-    shape_pt_lon: '-46.725786',
-    shape_pt_sequence: '81',
-    shape_dist_traveled: '3637.9119'
-}]
-```
+##### Resposta
 
-#### Paradas
-O tipo `paradas` possibilita a consulta pelos pontos de parada da cidade de São Paulo.
+| Atributo | Tipo | Descrição |
+| ---- | ---- | ---- |
+| `shapeId` | *integer* | Código identificador do trajeto.
+| `lat` | *string* |  Latitude daquele ponto do trajeto.
+| `lng` | *string* | Longitude daquele ponto do trajeto.
+| `sequence` | *string* | Número que indica a sequência de cada ponto do trajeto.
 
-Aceita o nome da parada ou o endereço de localização. O valor deve ser passado pelo parâmetro `termosBusca` como uma `string` ou um `array` de `strings`:
+#### Paradas (stops)
+O tipo `stops` possibilita a consulta pelos pontos de parada da cidade de São Paulo.
 
-``` js
-//passando string
-bus.find({
-  auth,
-  tipo: 'paradas',
-  termosBusca: 'Av. Mutinga'
-}).then(console.log)
-
-//passando array
-bus.find({
-  auth,
-  tipo: 'paradas',
-  termosBusca: ['Av. Mutinga', 'Av. Faria Lima', 'Av. Paulista']
-}).then(console.log)
-```
-##### Exemplo de resposta
-``` js
-[{
-    CodigoParada: 260015039,
-    Nome: 'PAULISTA B/C',
-    Endereco: 'AV PAULISTA/ AV REBOUCAS',
-    Latitude: -23.555883,
-    Longitude: -46.66306
-}]
-```
-
-#### Paradas por linha
-O tipo `paradasPorLinha` realiza uma busca por todos os pontos de parada atendidos por uma determinada linha.
-
-Aceita o código da linha. O valor deve ser passado pelo parâmetro `codigoLinha` como um `number` ou um `array` de `numbers`:
-
-``` js
-//passando number
-bus.find({
-  auth,
-  tipo: 'paradasPorLinha',
-  codigoLinha: 34041
-}).then(console.log)
-
-//passando array
-bus.find({
-  auth,
-  tipo: 'paradas',
-  codigoLinha: [34041, 34042, 34043]
-}).then(console.log)
-```
-##### Exemplo de resposta
-``` js
-[{
-    CodigoParada: 480014608,
-    Nome: 'TIBERIO C/B',
-    Endereco: 'R TIBERIO/ R MENFIS',
-    Latitude: -23.522875,
-    Longitude: -46.688219
-}]
-```
-
-#### Corredores
-
-O tipo `corredores` realiza uma busca por todos os corredores de ônibus da cidade de São Paulo.
+Aceita o nome da parada ou o endereço de localização. O valor deve ser passado pelo parâmetro `terms` como `string`:
 
 ``` js
 bus.find({
   auth,
-  tipo: 'corredores'    
+  type: 'stops',
+  terms: 'Av. Mutinga'
 }).then(console.log)
 ```
-##### Exemplo de resposta
-``` js
-[{
-    CodCot: 0,
-    CodCorredor: 8,
-    Nome: 'Campo Limpo'
-}]
-```
+##### Resposta
 
-#### Paradas por corredor
-O tipo `paradasPorCorredor` retorna a lista detalhada de todas as paradas que compõem um determinado corredor.
+| Atributo | Tipo | Descrição |
+| ---- | ---- | ---- |
+| `stopId` | *integer* | Código identificador da parada.
+| `name` | *string* |  Nome da parada.
+| `address` | *string* |  Endereço de localização da parada.
+| `lat` | *string* | Informação de latitude da localização da parada.
+| `lng` | *string* | Informação de longitude da localização da parada.
 
-Aceita o código do corredor. O valor deve ser passado pelo parâmetro `codigoCorredor` como um `number` ou um `array` de `numbers`:
 
-``` js
-//passando number
-bus.find({
-  auth,
-  tipo: 'paradasPorCorredor',
-  codigoCorredor: 8
-}).then(console.log)
+#### Paradas por linha (stopsByLine)
+O tipo `stopsByLine` realiza uma busca por todos os pontos de parada atendidos por uma determinada linha.
 
-//passando array
-bus.find({
-  auth,
-  tipo: 'paradasPorCorredor',
-  codigoCorredor: [8, 9]
-}).then(console.log)
-```
-##### Exemplo de resposta
-``` js
-[{
-    CodigoParada: 120011367,
-    Nome: 'TRES IRMAOS C/B',
-    Endereco: 'R JOSE JANNARELLI/ R TRES IRMAOS',
-    Latitude: -23.584817,
-    Longitude: -46.719021
-}]
-```
-
-#### Posição dos veículos
-O tipo `posicaoVeiculos` retorna a posição exata de cada veículo de qualquer linha de ônibus da SPTrans.
-
-Aceita o código da linha. O valor deve ser passado pelo parâmetro `codigoLinha` como um `number` ou um `array` de `numbers`:
-
-``` js
-//passando number
-bus.find({
-  auth,
-  tipo: 'posicaoVeiculos',
-  codigoLinha: 34041
-}).then(console.log)
-
-//passando array
-bus.find({
-  auth,
-  tipo: 'posicaoVeiculos',
-  codigoLinha: [34041, 34042]
-}).then(console.log)
-```
-
-#### Previsão de chegada
-O tipo `previsaoChegada` retorna a previsão de chegada de cada veículo de uma determinada linha e de um determinado ponto de parada, além da localização exata de cada veículo que constar na cadeia de previsões.
-
-Aceita o código da parada e o código da linha. O valor deve ser passado pelos parâmetros `codigoParada` e `codigoLinha` como um `number`:
+Aceita o código da linha. O valor deve ser passado pelo parâmetro `lineId` como `integer`:
 
 ``` js
 bus.find({
   auth,
-  tipo: 'previsaoChegada',
-  codigoParada: 260015039,
-  codigoLinha: 34041
+  type: 'stopsByLine',
+  lineId: 34041
 }).then(console.log)
 ```
-#### Previsão da linha
-O tipo `previsaoLinha` retorna uma lista com a previsão de chegada de cada um dos veículos da linha informada em todos os pontos de parada aos quais que ela atende.
+##### Resposta
 
-Aceita o código da linha. O valor deve ser passado pelo parâmetro `codigoLinha` como um `number` ou um `array` de `numbers`:
+| Atributo | Tipo | Descrição |
+| ---- | ---- | ---- |
+| `stopId` | *integer* | Código identificador da parada.
+| `name` | *string* |  Nome da parada.
+| `address` | *string* |  Endereço de localização da parada.
+| `lat` | *string* | Informação de latitude da localização da parada.
+| `lng` | *string* | Informação de longitude da localização da parada.
+
+#### Corredores (corridors)
+
+O tipo `corridors` realiza uma busca por todos os corredores de ônibus da cidade de São Paulo.
 
 ``` js
-//passando number
 bus.find({
   auth,
-  tipo: 'previsaoLinha',
-  codigoLinha: 34041
-}).then(console.log)
-
-//passando array
-bus.find({
-  auth,
-  tipo: 'previsaoLinha',
-  codigoLinha: [34041, 34042]
+  type: 'corridors'    
 }).then(console.log)
 ```
-#### Previsão da parada
-O tipo `previsaoParada` retorna uma lista com a previsão de chegada dos veículos de cada uma das linhas que atendem ao ponto de parada informado.
+##### Resposta
 
-Aceita o código da parada. O valor deve ser passado pelo parâmetro `codigoParada` como um `number` ou um `array` de `numbers`:
+| Atributo | Tipo | Descrição |
+| ---- | ---- | ---- |
+| `corridorId` | *integer* | Código identificador do corredor.
+| `name` | *string* |  Nome do corredor.
+
+#### Paradas por corredor (stopsByCorridor)
+O tipo `stopsByCorridor` retorna a lista detalhada de todas as paradas que compõem um determinado corredor.
+
+Aceita o código do corredor. O valor deve ser passado pelo parâmetro `corridorId` como `integer`:
 
 ``` js
-//passando number
 bus.find({
   auth,
-  tipo: 'previsaoParada',
-  codigoParada: 260015039
-}).then(console.log)
-
-//passando array
-bus.find({
-  auth,
-  tipo: 'previsaoParada',
-  codigoParada: [260015039, 260015038]
+  type: 'stopsByCorridor',
+  corridorId: 8
 }).then(console.log)
 ```
+##### Resposta
+
+| Atributo | Tipo | Descrição |
+| ---- | ---- | ---- |
+| `stopId` | *integer* | Código identificador da parada.
+| `name` | *string* |  Nome da parada.
+| `address` | *string* |  Endereço de localização da parada.
+| `lat` | *string* | Informação de latitude da localização da parada.
+| `lng` | *string* | Informação de longitude da localização da parada.
+
+#### Posição dos veículos (vehiclesPosition)
+O tipo `vehiclesPosition` retorna a posição exata de cada veículo de qualquer linha de ônibus da SPTrans.
+
+Aceita o código da linha. O valor deve ser passado pelo parâmetro `lineId` como `integer`:
+
+``` js
+bus.find({
+  auth,
+  type: 'vehiclesPosition',
+  lineId: 34041
+}).then(console.log)
+```
+##### Resposta
+
+| Atributo | Tipo | Descrição |
+| ---- | ---- | ---- |
+| `hour` | *string* | Horário de referência em que as informações foram geradas.
+| `lines` | *array* | Relação de linhas localizadas com os atributos abaixo:
+| `lineId` | *string* |  Endereço de localização da parada.
+| `displaySign` | *string* | Letreiro completo.
+| `type` | *int* | O sentido ao qual a linha atende, onde **1** significa do Terminal Principal (mainDestination) para Terminal Secundário (secondaryDestination) e **2** do Terminal Secundário para Terminal Principal.
+| `mainTerminal` | *string* | O letreiro descritivo da linha no sentido Terminal Principal para Terminal Secundário.
+| `secondaryTerminal` | *string* | O letreiro descritivo da linha no sentido Terminal Secundário para Terminal Principal.
+| `quantity` | *integer* | Quantidade de veículos localizados.
+| `vehicles` | *array* | Relação de veículos localizados com os atributos abaixo:
+| `prefix` | *integer* | Prefixo do veículo.
+| `accessible` | *bool* | Indica se o veículo é (true) ou não (false) acessível para pessoas com deficiência.
+| `hour` | *string* | Indica o horário universal (UTC) em que a localização foi capturada. Essa informação está no padrão ISO 8601.
+| `lat` | *string* | Informação de latitude da localização do veículo.
+| `lng` | *string* | Informação de longitude da localização do veículo.
+
+#### Previsão de chegada (arrivalForecast)
+O tipo `arrivalForecast` retorna a previsão de chegada de cada veículo de uma determinada linha e de um determinado ponto de parada, além da localização exata de cada veículo que constar na cadeia de previsões.
+
+Aceita o código da parada e o código da linha. O valor deve ser passado pelos parâmetros `stopId` e `lineId` como `integer`:
+
+``` js
+bus.find({
+  auth,
+  type: 'arrivalForecast',
+  stopId: 260015039,
+  lineId: 34041
+}).then(console.log)
+```
+##### Resposta
+
+| Atributo | Tipo | Descrição |
+| ---- | ---- | ---- |
+| `hour` | *string* | Horário de referência em que as informações foram geradas.
+| `stops` | *array* | Representa um ponto de parada com os atributos abaixo:
+| `stopId` | *integer* | Código identificador da parada.
+| `name` | *string* |  Nome da parada.
+| `address` | *string* |  Endereço de localização da parada.
+| `lat` | *string* | Informação de latitude da localização da parada.
+| `lng` | *string* | Informação de longitude da localização da parada.
+| `lines` | *array* | Relação de linhas localizadas com os atributos abaixo:
+| `lineId` | *string* |  Endereço de localização da parada.
+| `displaySign` | *string* | Letreiro completo.
+| `type` | *int* | O sentido ao qual a linha atende, onde **1** significa do Terminal Principal (mainDestination) para Terminal Secundário (secondaryDestination) e **2** do Terminal Secundário para Terminal Principal.
+| `mainTerminal` | *string* | O letreiro descritivo da linha no sentido Terminal Principal para Terminal Secundário.
+| `secondaryTerminal` | *string* | O letreiro descritivo da linha no sentido Terminal Secundário para Terminal Principal.
+| `quantity` | *integer* | Quantidade de veículos localizados.
+| `vehicles` | *array* | Relação de veículos localizados com os atributos abaixo:
+| `prefix` | *integer* | Prefixo do veículo.
+| `accessible` | *bool* | Indica se o veículo é (true) ou não (false) acessível para pessoas com deficiência.
+| `hour` | *string* | Indica o horário universal (UTC) em que a localização foi capturada. Essa informação está no padrão ISO 8601.
+| `lat` | *string* | Informação de latitude da localização do veículo.
+| `lng` | *string* | Informação de longitude da localização do veículo.
+
+#### Previsão da linha (lineForecast)
+O tipo `lineForecast` retorna uma lista com a previsão de chegada de cada um dos veículos da linha informada em todos os pontos de parada aos quais que ela atende.
+
+Aceita o código da linha. O valor deve ser passado pelo parâmetro `lineId` como `integer`:
+
+``` js
+bus.find({
+  auth,
+  type: 'lineForecast',
+  lineId: 34041
+}).then(console.log)
+```
+##### Resposta
+
+| Atributo | Tipo | Descrição |
+| ---- | ---- | ---- |
+| `hour` | *string* | Horário de referência em que as informações foram geradas.
+| `stops` | *array* | Representa um ponto de parada com os atributos abaixo:
+| `stopId` | *integer* | Código identificador da parada.
+| `name` | *string* |  Nome da parada.
+| `address` | *string* |  Endereço de localização da parada.
+| `lat` | *string* | Informação de latitude da localização da parada.
+| `lng` | *string* | Informação de longitude da localização da parada.
+| `vehicles` | *array* | Relação de veículos localizados com os atributos abaixo:
+| `prefix` | *integer* | Prefixo do veículo.
+| `accessible` | *bool* | Indica se o veículo é (true) ou não (false) acessível para pessoas com deficiência.
+| `hour` | *string* | Indica o horário universal (UTC) em que a localização foi capturada. Essa informação está no padrão ISO 8601.
+| `lat` | *string* | Informação de latitude da localização do veículo.
+| `lng` | *string* | Informação de longitude da localização do veículo.
+
+#### Previsão da parada (stopForecast)
+O tipo `stopForecast` retorna uma lista com a previsão de chegada dos veículos de cada uma das linhas que atendem ao ponto de parada informado.
+
+Aceita o código da parada. O valor deve ser passado pelo parâmetro `stopId` como `integer`:
+
+``` js
+bus.find({
+  auth,
+  type: 'stopForecast',
+  stopId: 260015039
+}).then(console.log)
+```
+##### Resposta
+
+| Atributo | Tipo | Descrição |
+| ---- | ---- | ---- |
+| `hour` | *string* | Horário de referência em que as informações foram geradas.
+| `stops` | *array* | Representa um ponto de parada com os atributos abaixo:
+| `stopId` | *integer* | Código identificador da parada.
+| `name` | *string* |  Nome da parada.
+| `address` | *string* |  Endereço de localização da parada.
+| `lat` | *string* | Informação de latitude da localização da parada.
+| `lng` | *string* | Informação de longitude da localização da parada.
+| `lines` | *array* | Relação de linhas localizadas com os atributos abaixo:
+| `lineId` | *string* |  Endereço de localização da parada.
+| `displaySign` | *string* | Letreiro completo.
+| `type` | *int* | O sentido ao qual a linha atende, onde **1** significa do Terminal Principal (mainDestination) para Terminal Secundário (secondaryDestination) e **2** do Terminal Secundário para Terminal Principal.
+| `mainTerminal` | *string* | O letreiro descritivo da linha no sentido Terminal Principal para Terminal Secundário.
+| `secondaryTerminal` | *string* | O letreiro descritivo da linha no sentido Terminal Secundário para Terminal Principal.
+| `quantity` | *integer* | Quantidade de veículos localizados.
+| `vehicles` | *array* | Relação de veículos localizados com os atributos abaixo:
+| `prefix` | *integer* | Prefixo do veículo.
+| `accessible` | *bool* | Indica se o veículo é (true) ou não (false) acessível para pessoas com deficiência.
+| `hour` | *string* | Indica o horário universal (UTC) em que a localização foi capturada. Essa informação está no padrão ISO 8601.
+| `lat` | *string* | Informação de latitude da localização do veículo.
+| `lng` | *string* | Informação de longitude da localização do veículo.
 
 ## Como contribuir
 Para contribuir com o projeto, [clique aqui](https://github.com/thiagommedeiros/bus-promise/blob/master/CONTRIBUTING.md).
 
 ## Changelog
-Para verificar o changelog, [clique aqui](https://github.com/thiagommedeiros/bus-promise/blob/master/CHANGELOG.md).
+Para verificar as mudanças da biblioteca acesse changelog, [clique aqui](https://github.com/thiagommedeiros/bus-promise/blob/master/CHANGELOG.md).
 
 ## Autor
 
