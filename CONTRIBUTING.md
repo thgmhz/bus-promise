@@ -6,8 +6,8 @@
 ## O que você precisa saber para contribuir
 - O `bus-promise` funciona no lado do servidor (nodejs) e também no lado do browser.
 - A biblioteca busca os dados em duas fontes:
- - **API da SPTrans**: você deve criar uma conta de desenvolvedor para ter acesso a documentação da API (http://www.sptrans.com.br/desenvolvedores).
- - **bus-server**: este é outro projeto *open-source* que serve de apoio para o `bus-promise`. Basicamente, a SPTrans disponibiliza parte dos dados em arquivos `.csv`, que seguem um formato internacional chamado **GTFS**. O papel principal do **bus-server** é fornecer uma `API RESTful` para o `bus-promise` consultar esses dados. Outro papel desse *server* é receber as *requests* do `bus-promise` feitas no *browser*, dado que a API da SPTrans **não fornece suporte a `CORS`**.  Link do projeto: (https://github.com/thiagommedeiros/bus-server).
+  - **API da SPTrans**: você deve criar uma conta de desenvolvedor para ter acesso a documentação da API (http://www.sptrans.com.br/desenvolvedores).
+  - **bus-server**: este é outro projeto *open-source* que serve de apoio para o `bus-promise`. Basicamente, a SPTrans disponibiliza parte dos dados na sua API e outra parte em arquivos `.csv`, que seguem um formato internacional chamado **GTFS**. O papel principal do **bus-server** é fornecer uma `API RESTful` para o `bus-promise` consultar os dados GTFS. Outro papel desse *server* é receber as *requests* do `bus-promise` feitas no *browser*, dado que a API da SPTrans **não fornece suporte a `CORS`**.  Link do projeto: (https://github.com/thiagommedeiros/bus-server).
  - A SPTrans atualiza os arquivos GTFS diariamente, então precisamos manter os arquivos do `bus-server` atualizado regularmente. Basicamente é fazer download dos arquivos no site da SPTrans e abrir um PR no `bus-server`.
 
 
