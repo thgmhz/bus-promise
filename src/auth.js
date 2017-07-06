@@ -1,43 +1,32 @@
 import axios from 'axios'
 import { API } from './constants'
 
+const sptrans = `${API.sptrans}${API.auth.route}`
+const busServer = `${API.busServer}/auth`
 const isBrowser = typeof window !== 'undefined'
 
-function handleError (err) {
-  throw new Error(err)
+const handleError = err => {
+  throw Error(err)
 }
 
-function handleResponse (res) {
-  if (isBrowser) return res.data
-  return res
-}
+const handleResponse = res =>
+  isBrowser ? res.data : res
 
-function checkIfHasToken (token) {
-  token || handleError('O token é obrigatório para autenticação.')
-  return token
-}
+const checkIfHasToken = token =>
+  token || handleError('Token is required for authentication.')
 
-function validateHttpStatus (res) {
-  res.status === 200 || handleError('Erro ao se conectar com o serviço da SPTrans.')
-  return res
-}
+const validateHttpStatus = res =>
+  res.status === 200 ? res :
+  handleError(`Error ${res.status} when connecting to SPTrans service.`)
 
-function validateToken (res) {
-  res.data || handleError('Token inválido.')
-  return res
-}
+const validateToken = res =>
+  res.data ? res : handleError('Invalid Token.')
 
-function setCredentials (res) {
-  if (isBrowser) return res.auth[0]
-  return res.headers['set-cookie'][0]
-}
+const setCredentials = res =>
+  isBrowser ? res.auth[0] : res.headers['set-cookie'][0]
 
-function fetchData (token) {
-  let url = API.sptrans + API.auth.route
-
-  if (isBrowser) {
-    url = `${API.server}/auth`
-  }
+const fetchData = token => {
+  const url = isBrowser ? busServer : sptrans
 
   const config = {
     method: 'post',

@@ -1,10 +1,6 @@
 import test from 'ava'
 import bus from '../../src'
 
-test('bus-promise should has the auth method', t => {
-  t.is(typeof bus.auth, 'function')
-})
-
 test('when sending no token should return error', async t => {
   await bus.auth().catch(err => {
     t.true(err instanceof Error)
