@@ -78,16 +78,16 @@ function handleResponse (res, options) {
   const data = res.data
   const type = options.type
 
-  if (type === 'lines') return linesResponse(data)
-  if (type === 'shapes') return shapesResponse(data)
-  if (type === 'stops') return stopsResponse(data)
-  if (type === 'stopsByCorridor') return stopsResponse(data)
-  if (type === 'stopsByLine') return stopsResponse(data)
-  if (type === 'corridors') return corridorsResponse(data)
-  if (type === 'vehiclesPosition') return vehiclesPositionResponse(data)
-  if (type === 'arrivalForecast') return arrivalForecastResponse(data)
-  if (type === 'lineForecast') return lineForecastResponse(data)
-  if (type === 'stopForecast') return stopForecastResponse(data)
+  return type === 'lines' ? linesResponse(data) :
+  type === 'shapes' ? shapesResponse(data) :
+  type === 'stops' ? stopsResponse(data) :
+  type === 'stopsByCorridor' ? stopsResponse(data) :
+  type === 'stopsByLine' ? stopsResponse(data) :
+  type === 'corridors' ? corridorsResponse(data) :
+  type === 'vehiclesPosition' ? vehiclesPositionResponse(data) :
+  type === 'arrivalForecast' ? arrivalForecastResponse(data) :
+  type === 'lineForecast' ? lineForecastResponse(data) :
+  type === 'stopForecast' ? stopForecastResponse(data) : null
 }
 
 function fetchData (options) {
