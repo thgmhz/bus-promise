@@ -1,5 +1,5 @@
 import API from './api'
 
-module.exports = {
+export {
   API
 }

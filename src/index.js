@@ -1,7 +1,7 @@
 import auth from './auth'
 import find from './find'
 
-module.exports = {
+export {
   auth,
   find
 }

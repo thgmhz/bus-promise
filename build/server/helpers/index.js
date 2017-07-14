@@ -1,5 +1,10 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.stopForecastResponse = exports.lineForecastResponse = exports.arrivalForecastResponse = exports.vehiclesPositionResponse = exports.corridorsResponse = exports.stopsResponse = exports.shapesResponse = exports.linesResponse = undefined;
+
 var _linesResponse = require('./lines-response');
 
 var _linesResponse2 = _interopRequireDefault(_linesResponse);
@@ -34,13 +39,11 @@ var _stopForecastResponse2 = _interopRequireDefault(_stopForecastResponse);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-module.exports = {
-  linesResponse: _linesResponse2.default,
-  shapesResponse: _shapesResponse2.default,
-  stopsResponse: _stopsResponse2.default,
-  corridorsResponse: _corridorsResponse2.default,
-  vehiclesPositionResponse: _vehiclesPositionResponse2.default,
-  arrivalForecastResponse: _arrivalForecastResponse2.default,
-  lineForecastResponse: _lineForecastResponse2.default,
-  stopForecastResponse: _stopForecastResponse2.default
-};
+exports.linesResponse = _linesResponse2.default;
+exports.shapesResponse = _shapesResponse2.default;
+exports.stopsResponse = _stopsResponse2.default;
+exports.corridorsResponse = _corridorsResponse2.default;
+exports.vehiclesPositionResponse = _vehiclesPositionResponse2.default;
+exports.arrivalForecastResponse = _arrivalForecastResponse2.default;
+exports.lineForecastResponse = _lineForecastResponse2.default;
+exports.stopForecastResponse = _stopForecastResponse2.default;

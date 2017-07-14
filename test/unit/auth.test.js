@@ -1,5 +1,5 @@
 import test from 'ava'
-import bus from '../../src'
+import * as bus from '../../src'
 
 test('bus-promise should has the auth method', t => {
   t.is(typeof bus.auth, 'function')
