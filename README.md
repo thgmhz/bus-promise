@@ -35,7 +35,7 @@ $ npm install --save bus-promise
 
 ##### Node.js
 ``` js
-import bus from 'bus-promise'
+import * as bus from 'bus-promise'
 ```
 
 ##### Browser
@@ -49,7 +49,7 @@ A API da SPTrans exige autenticação com um `token` que você pode obter ao  se
 O método `auth()` recebe um `token` e retorna uma `Promise` com as `credentials`.
 
 ``` js
-import bus from 'bus-promise'
+import * as bus from 'bus-promise'
 
 bus.auth('SEU_TOKEN_AQUI')
   .then(console.log)
@@ -185,7 +185,7 @@ O tipo `corridors` realiza uma busca por todos os corredores de ônibus da cidad
 ``` js
 bus.find({
   auth,
-  type: 'corridors'    
+  type: 'corridors'
 }).then(console.log)
 ```
 ##### Resposta
