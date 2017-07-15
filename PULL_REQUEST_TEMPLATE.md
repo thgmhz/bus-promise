@@ -4,7 +4,7 @@ Adicione uma descrição
 
 ## Precisa alterar a documentação?
 
-- [ ] Quais funcionalidades serão afetadas com esta mudança?
+- [ ] Sim. Descreva as funcionalidades que serão afetadas com esta mudança.
 - [ ] Não.
 
 ## Checklist
