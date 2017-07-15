@@ -1,3 +1,7 @@
+## 1.1.1 (Jul 15, 2017)
+- **Build:** This plugin replace process.env.NODE_ENV with "production" because it crashes on browser.
+([@thiagommedeiros](https://github.com/thiagommedeiros) in [#35](https://github.com/thiagommedeiros/bus-promise/pull/35))
+
 ## 1.1.0 (Jul 15, 2017)
 - **Build:** Browser build changed to use `rollup` instead of `browserify`.
 - **ES6 Modules:** Update code to follow the ES6 modules final syntax

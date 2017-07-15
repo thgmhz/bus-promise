@@ -1,6 +1,7 @@
 import babel from 'rollup-plugin-babel'
 import commonjs from 'rollup-plugin-commonjs'
 import filesize from 'rollup-plugin-filesize'
+import replace from 'rollup-plugin-replace'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import uglify from 'rollup-plugin-uglify'
 
@@ -12,6 +13,9 @@ export default {
   plugins: [
     nodeResolve({
       browser: true
+    }),
+    replace({
+      'process.env.NODE_ENV': JSON.stringify( 'production' )
     }),
     commonjs(),
     babel({
