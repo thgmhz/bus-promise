@@ -1,3 +1,8 @@
+## 1.1.0 (Jul 15, 2017)
+- **Build:** Browser build changed to use `rollup` instead of `browserify`.
+- **ES6 Modules:** Update code to follow the ES6 modules final syntax
+([@thiamsantos](https://github.com/thiamsantos) in [#34](https://github.com/thiagommedeiros/bus-promise/pull/34))
+
 ## 1.0.9 (Jul 02, 2017)
 - **Version:** The SPTrans api version was changed from `v1` to `v2.1`
 - **Language:** The `bus-promise` parameters and responses was changed from `portuguese` to `english`
