@@ -359,7 +359,10 @@ Para contribuir com o projeto, [clique aqui](https://github.com/thiagommedeiros/
 ## Changelog
 Para verificar as mudanças da biblioteca acesse changelog, [clique aqui](https://github.com/thiagommedeiros/bus-promise/blob/master/CHANGELOG.md).
 
-## Autor
+## Contribuidores
+| [<img src="https://avatars4.githubusercontent.com/u/13632762?v=4&s=115"><br><sub>@thiamsantos</sub>](https://github.com/thiamsantos) |
+| :---: |
 
+## Autor
 | [<img src="https://avatars0.githubusercontent.com/u/19213244?v=3&s=115"><br><sub>@thiagommedeiros</sub>](https://github.com/thiagommedeiros) |
 | :---: |
