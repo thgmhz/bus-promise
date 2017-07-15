@@ -7,7 +7,7 @@ import arrivalForecastResponse from './arrival-forecast-response'
 import lineForecastResponse from './line-forecast-response'
 import stopForecastResponse from './stop-forecast-response'
 
-module.exports = {
+export {
   linesResponse,
   shapesResponse,
   stopsResponse,
