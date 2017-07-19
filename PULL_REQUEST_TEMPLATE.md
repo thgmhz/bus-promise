@@ -11,5 +11,7 @@ Adicione uma descrição
 
 - [ ] Versão atualizada no `package.json`
 - [ ] `CHANGELOG.md` atualizado com as mudanças
+- [ ] Atualizou o `build` de `browser`
+- [ ] Atualizou o `build` de `server`
 - [ ] Aprovado pelo `review`
 - [ ] Pronto para `merge`
