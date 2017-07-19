@@ -121,6 +121,7 @@ function fetchData(options) {
       url = _constants.API.server + '/find';
       (0, _assign2.default)(params, {
         auth: options.auth,
+        type: options.type,
         route: _constants.API[options.type].route
       });
     }
