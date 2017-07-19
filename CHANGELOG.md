@@ -1,6 +1,10 @@
+## 1.1.2 (Jul 15, 2017)
+- **Find:** Update find method to send the `type` param to `bus-server`.
+([@thiagommedeiros](https://github.com/thiagommedeiros) in [#37](https://github.com/thiagommedeiros/bus-promise/pull/37))
+
 ## 1.1.1 (Jul 15, 2017)
 - **Build:** This plugin replace process.env.NODE_ENV with "production" because it crashes on browser.
-([@thiagommedeiros](https://github.com/thiagommedeiros) in [#35](https://github.com/thiagommedeiros/bus-promise/pull/35))
+([@thiagommedeiros](https://github.com/thiagommedeiros) in [#36](https://github.com/thiagommedeiros/bus-promise/pull/36))
 
 ## 1.1.0 (Jul 15, 2017)
 - **Build:** Browser build changed to use `rollup` instead of `browserify`.
