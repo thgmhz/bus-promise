@@ -102,6 +102,7 @@ function fetchData (options) {
       url = `${API.server}/find`
       Object.assign(params, {
         auth: options.auth,
+        type: options.type,
         route: API[options.type].route
       })
     }
