@@ -19,15 +19,15 @@ const lines = lines =>
   }))
 
 export default function vehiclesPositionResponse (vehicles) {
-  if (!vehicles.lines) {
+  if (!vehicles.l.length) {
     return {
-      hour: vehicles.h,
+      hour: vehicles.hr,
       lines: null
     }
   }
 
   return {
-    hour: vehicles.h,
+    hour: vehicles.hr,
     lines: lines(vehicles.l)
   }
 }
