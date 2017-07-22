@@ -1,3 +1,10 @@
+## 1.1.3 (Jul 21, 2017)
+- **Bug-fix:**
+  - Fix async error on lines response
+  - Fix stops response params
+  - Fix vehicles position response params
+([@thiagommedeiros](https://github.com/thiagommedeiros) in [#38](https://github.com/thiagommedeiros/bus-promise/pull/38))
+
 ## 1.1.2 (Jul 15, 2017)
 - **Find:** Update find method to send the `type` param to `bus-server`.
 ([@thiagommedeiros](https://github.com/thiagommedeiros) in [#37](https://github.com/thiagommedeiros/bus-promise/pull/37))
