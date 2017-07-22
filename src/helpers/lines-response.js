@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { API } from '../constants'
 
-export default async function buildLinhasResponse (lines) {
+export default function linesResponse (lines) {
   const buildPromise = tripId =>
     axios({
       method: 'get',
@@ -9,8 +9,7 @@ export default async function buildLinhasResponse (lines) {
     })
 
   const parseShapeId = res =>
-    res.map(item =>
-      item.data[0] ? item.data[0].shape_id : null)
+    res.map(item => item.data[0] ? item.data[0].shape_id : null)
 
   const getShapesIds = tripsIds => {
     const promises = tripsIds.map(buildPromise)
@@ -20,18 +19,15 @@ export default async function buildLinhasResponse (lines) {
   const tripsIds = lines.map(item =>
     `${item.lt}-${item.tl}-${item.sl - 1}`)
 
-  const shapesIds = await getShapesIds(tripsIds)
-
-  const response = lines.map((item, key) => ({
-    lineId: item.cl,
-    shapeId: shapesIds[key],
-    circular: item.lc,
-    displaySign: item.lt,
-    direction: item.sl,
-    type: item.tl,
-    mainTerminal: item.tp,
-    secondaryTerminal: item.ts,
-  }))
-
-  return response
+  return getShapesIds(tripsIds).then(shapesIds =>
+    lines.map((item, key) => ({
+      lineId: item.cl,
+      shapeId: shapesIds[key],
+      circular: item.lc,
+      displaySign: item.lt,
+      direction: item.sl,
+      type: item.tl,
+      mainTerminal: item.tp,
+      secondaryTerminal: item.ts
+    })))
 }
