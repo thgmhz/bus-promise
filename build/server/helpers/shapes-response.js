@@ -4,8 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = buildShapesResponse;
-function buildShapesResponse(shapes) {
-  return shapes.map(function (shape) {
+function buildShapesResponse(data) {
+  return data.map(function (shape) {
     return {
       shapeId: shape.shape_id,
       lat: shape.shape_pt_lat,

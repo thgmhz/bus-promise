@@ -76,9 +76,8 @@ function buildParams(options) {
         return (0, _defineProperty3.default)({}, paramName, value);
       });
     }
-    obj[paramName] = paramValue;
 
-    return obj;
+    return (0, _assign2.default)({}, obj, (0, _defineProperty3.default)({}, paramName, paramValue));
   };
 
   var params = requiredParams.reduce(build, {});
@@ -96,17 +95,20 @@ function handleResponse(res, options) {
 
   var data = res.data;
   var type = options.type;
+  var response = void 0;
 
-  if (type === 'lines') return (0, _helpers.linesResponse)(data);
-  if (type === 'shapes') return (0, _helpers.shapesResponse)(data);
-  if (type === 'stops') return (0, _helpers.stopsResponse)(data);
-  if (type === 'stopsByCorridor') return (0, _helpers.stopsResponse)(data);
-  if (type === 'stopsByLine') return (0, _helpers.stopsResponse)(data);
-  if (type === 'corridors') return (0, _helpers.corridorsResponse)(data);
-  if (type === 'vehiclesPosition') return (0, _helpers.vehiclesPositionResponse)(data);
-  if (type === 'arrivalForecast') return (0, _helpers.arrivalForecastResponse)(data);
-  if (type === 'lineForecast') return (0, _helpers.lineForecastResponse)(data);
-  if (type === 'stopForecast') return (0, _helpers.stopForecastResponse)(data);
+  if (type === 'lines') response = _helpers.linesResponse;
+  if (type === 'shapes') response = _helpers.shapesResponse;
+  if (type === 'stops') response = _helpers.stopsResponse;
+  if (type === 'stopsByCorridor') response = _helpers.stopsResponse;
+  if (type === 'stopsByLine') response = _helpers.stopsResponse;
+  if (type === 'corridors') response = _helpers.corridorsResponse;
+  if (type === 'vehiclesPosition') response = _helpers.vehiclesPositionResponse;
+  if (type === 'arrivalForecast') response = _helpers.arrivalForecastResponse;
+  if (type === 'lineForecast') response = _helpers.lineForecastResponse;
+  if (type === 'stopForecast') response = _helpers.stopForecastResponse;
+
+  return response(data);
 }
 
 function fetchData(options) {

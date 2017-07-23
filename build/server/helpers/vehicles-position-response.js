@@ -4,8 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = vehiclesPositionResponse;
-var vehicles = function vehicles(_vehicles) {
-  return _vehicles.map(function (vehicle) {
+var vehicles = function vehicles(data) {
+  return data.map(function (vehicle) {
     return {
       prefix: vehicle.p,
       accessible: vehicle.a,
@@ -16,30 +16,16 @@ var vehicles = function vehicles(_vehicles) {
   });
 };
 
-var lines = function lines(_lines) {
-  return _lines.map(function (line) {
+function vehiclesPositionResponse(data) {
+  if (!data.vs.length) {
     return {
-      lineId: line.cl,
-      displaySign: line.c,
-      direction: line.sl,
-      mainTerminal: line.lt0,
-      secondaryTerminal: line.lt1,
-      quantity: line.qv,
-      vehicles: vehicles(line.vs)
-    };
-  });
-};
-
-function vehiclesPositionResponse(vehicles) {
-  if (!vehicles.l.length) {
-    return {
-      hour: vehicles.hr,
-      lines: null
+      hour: data.hr,
+      vehicles: null
     };
   }
 
   return {
-    hour: vehicles.hr,
-    lines: lines(vehicles.l)
+    hour: data.hr,
+    vehicles: vehicles(data.vs)
   };
 }

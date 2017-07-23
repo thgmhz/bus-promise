@@ -4,20 +4,20 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = arrivalForecastResponse;
-var vehicles = function vehicles(_vehicles) {
-  return _vehicles.map(function (vehicle) {
+var vehicles = function vehicles(data) {
+  return data.map(function (vehicle) {
     return {
       prefix: vehicle.p,
       accessible: vehicle.a,
-      hour: vehicle.ta,
+      hour: vehicle.t,
       lat: vehicle.py,
       lng: vehicle.px
     };
   });
 };
 
-var lines = function lines(_lines) {
-  return _lines.map(function (line) {
+var lines = function lines(data) {
+  return data.map(function (line) {
     return {
       lineId: line.cl,
       displaySign: line.c,
@@ -30,22 +30,22 @@ var lines = function lines(_lines) {
   });
 };
 
-function arrivalForecastResponse(stop) {
-  if (!stop.p) {
+function arrivalForecastResponse(data) {
+  if (!data.p) {
     return {
-      hour: stop.hr,
+      hour: data.hr,
       stop: null
     };
   }
 
   return {
-    hour: stop.hr,
+    hour: data.hr,
     stop: {
-      stopId: stop.p.cp,
-      name: stop.p.np,
-      lat: stop.p.py,
-      lng: stop.p.px,
-      lines: lines(stop.p.l)
+      stopId: data.p.cp,
+      name: data.p.np,
+      lat: data.p.py,
+      lng: data.p.px,
+      lines: lines(data.p.l)
     }
   };
 }
