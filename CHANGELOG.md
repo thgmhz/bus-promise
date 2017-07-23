@@ -1,3 +1,10 @@
+## 1.1.4 (Jul 22, 2017)
+- **Refactor and Bug-fix:**
+  - Refactoring tests to get better assertions
+  - Fix sptrans arrival forecast route
+  - Fix params that sptrans has changed
+([@thiagommedeiros](https://github.com/thiagommedeiros) in [#39](https://github.com/thiagommedeiros/bus-promise/pull/39))
+
 ## 1.1.3 (Jul 21, 2017)
 - **Bug-fix:**
   - Fix async error on lines response
