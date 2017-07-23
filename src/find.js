@@ -57,9 +57,8 @@ function buildParams (options) {
     if (paramValue instanceof Array) {
       return paramValue.map(value => ({ [paramName]: value }))
     }
-    obj[paramName] = paramValue
 
-    return obj
+    return Object.assign({}, obj, { [paramName]: paramValue })
   }
 
   const params = requiredParams.reduce(build, {})
@@ -77,17 +76,20 @@ function handleResponse (res, options) {
 
   const data = res.data
   const type = options.type
+  let response
 
-  if (type === 'lines') return linesResponse(data)
-  if (type === 'shapes') return shapesResponse(data)
-  if (type === 'stops') return stopsResponse(data)
-  if (type === 'stopsByCorridor') return stopsResponse(data)
-  if (type === 'stopsByLine') return stopsResponse(data)
-  if (type === 'corridors') return corridorsResponse(data)
-  if (type === 'vehiclesPosition') return vehiclesPositionResponse(data)
-  if (type === 'arrivalForecast') return arrivalForecastResponse(data)
-  if (type === 'lineForecast') return lineForecastResponse(data)
-  if (type === 'stopForecast') return stopForecastResponse(data)
+  if (type === 'lines') response = linesResponse
+  if (type === 'shapes') response = shapesResponse
+  if (type === 'stops') response = stopsResponse
+  if (type === 'stopsByCorridor') response = stopsResponse
+  if (type === 'stopsByLine') response = stopsResponse
+  if (type === 'corridors') response = corridorsResponse
+  if (type === 'vehiclesPosition') response = vehiclesPositionResponse
+  if (type === 'arrivalForecast') response = arrivalForecastResponse
+  if (type === 'lineForecast') response = lineForecastResponse
+  if (type === 'stopForecast') response = stopForecastResponse
+
+  return response(data)
 }
 
 function fetchData (options) {

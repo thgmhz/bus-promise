@@ -1,5 +1,5 @@
-const vehicles = vehicles =>
-  vehicles.map(vehicle => ({
+const vehicles = data =>
+  data.map(vehicle => ({
     prefix: vehicle.p,
     accessible: vehicle.a,
     hour: vehicle.ta,
@@ -7,27 +7,16 @@ const vehicles = vehicles =>
     lng: vehicle.px
   }))
 
-const lines = lines =>
-  lines.map(line => ({
-    lineId: line.cl,
-    displaySign: line.c,
-    direction: line.sl,
-    mainTerminal: line.lt0,
-    secondaryTerminal: line.lt1,
-    quantity: line.qv,
-    vehicles: vehicles(line.vs)
-  }))
-
-export default function vehiclesPositionResponse (vehicles) {
-  if (!vehicles.l.length) {
+export default function vehiclesPositionResponse (data) {
+  if (!data.vs.length) {
     return {
-      hour: vehicles.hr,
-      lines: null
+      hour: data.hr,
+      vehicles: null
     }
   }
 
   return {
-    hour: vehicles.hr,
-    lines: lines(vehicles.l)
+    hour: data.hr,
+    vehicles: vehicles(data.vs)
   }
 }

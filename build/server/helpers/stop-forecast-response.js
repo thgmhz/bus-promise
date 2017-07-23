@@ -4,8 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = stopForecastResponse;
-var vehicles = function vehicles(_vehicles) {
-  return _vehicles.map(function (vehicle) {
+var vehicles = function vehicles(data) {
+  return data.map(function (vehicle) {
     return {
       prefix: vehicle.p,
       accessible: vehicle.a,
@@ -16,8 +16,8 @@ var vehicles = function vehicles(_vehicles) {
   });
 };
 
-var lines = function lines(_lines) {
-  return _lines.map(function (line) {
+var lines = function lines(data) {
+  return data.map(function (line) {
     return {
       lineId: line.cl,
       displaySign: line.c,
@@ -30,22 +30,22 @@ var lines = function lines(_lines) {
   });
 };
 
-function stopForecastResponse(stop) {
-  if (!stop.p) {
+function stopForecastResponse(data) {
+  if (!data.p) {
     return {
-      hour: stop.hr,
+      hour: data.hr,
       stop: null
     };
   }
 
   return {
-    hour: stop.hr,
+    hour: data.hr,
     stop: {
-      stopId: stop.p.cp,
-      name: stop.p.np,
-      lat: stop.p.py,
-      lng: stop.p.px,
-      lines: lines(stop.p.l)
+      stopId: data.p.cp,
+      name: data.p.np,
+      lat: data.p.py,
+      lng: data.p.px,
+      lines: lines(data.p.l)
     }
   };
 }

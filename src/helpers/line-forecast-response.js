@@ -1,14 +1,14 @@
-const vehicles = vehicles =>
-  vehicles.map(vehicle => ({
+const vehicles = data =>
+  data.map(vehicle => ({
     prefix: vehicle.p,
     accessible: vehicle.a,
-    hour: vehicle.ta,
+    hour: vehicle.t,
     lat: vehicle.py,
     lng: vehicle.px
   }))
 
-const stops = stops =>
-  stops.map(stop => ({
+const stops = data =>
+  data.map(stop => ({
     stopId: stop.cp,
     name: stop.np,
     lat: stop.py,
@@ -16,16 +16,16 @@ const stops = stops =>
     vehicles: vehicles(stop.vs)
   }))
 
-export default function lineForecastResponse (line) {
-  if (!line.ps) {
+export default function lineForecastResponse (data) {
+  if (!data.ps) {
     return {
-      hour: line.hr,
+      hour: data.hr,
       stops: null
     }
   }
 
   return {
-    hour: line.hr,
-    stops: stops(line.ps)
+    hour: data.hr,
+    stops: stops(data.ps)
   }
 }

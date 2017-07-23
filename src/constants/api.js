@@ -1,5 +1,4 @@
 export default {
-  localhost: 'http://localhost:8888',
   sptrans: 'http://api.olhovivo.sptrans.com.br/v2.1',
   server: 'https://busserver.herokuapp.com',
   auth: {
@@ -45,7 +44,7 @@ export default {
     }
   },
   vehiclesPosition: {
-    route: '/posicao',
+    route: '/posicao/linha',
     required: ['lineId'],
     proxyParams: {
       lineId: 'codigoLinha'

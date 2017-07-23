@@ -1,5 +1,5 @@
-export default function stopsResponse (stops) {
-  return stops.map(stop => ({
+export default function stopsResponse (data) {
+  return data.map(stop => ({
     stopId: stop.cp,
     name: stop.np,
     address: stop.ed,

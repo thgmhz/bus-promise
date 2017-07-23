@@ -4,20 +4,20 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = lineForecastResponse;
-var vehicles = function vehicles(_vehicles) {
-  return _vehicles.map(function (vehicle) {
+var vehicles = function vehicles(data) {
+  return data.map(function (vehicle) {
     return {
       prefix: vehicle.p,
       accessible: vehicle.a,
-      hour: vehicle.ta,
+      hour: vehicle.t,
       lat: vehicle.py,
       lng: vehicle.px
     };
   });
 };
 
-var stops = function stops(_stops) {
-  return _stops.map(function (stop) {
+var stops = function stops(data) {
+  return data.map(function (stop) {
     return {
       stopId: stop.cp,
       name: stop.np,
@@ -28,16 +28,16 @@ var stops = function stops(_stops) {
   });
 };
 
-function lineForecastResponse(line) {
-  if (!line.ps) {
+function lineForecastResponse(data) {
+  if (!data.ps) {
     return {
-      hour: line.hr,
+      hour: data.hr,
       stops: null
     };
   }
 
   return {
-    hour: line.hr,
-    stops: stops(line.ps)
+    hour: data.hr,
+    stops: stops(data.ps)
   };
 }

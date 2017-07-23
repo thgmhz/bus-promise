@@ -4,8 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = stopsResponse;
-function stopsResponse(stops) {
-  return stops.map(function (stop) {
+function stopsResponse(data) {
+  return data.map(function (stop) {
     return {
       stopId: stop.cp,
       name: stop.np,
