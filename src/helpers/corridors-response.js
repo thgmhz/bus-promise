@@ -1,5 +1,5 @@
-export default function corridorsResponse (corridors) {
-  return corridors.map(corridor => ({
+export default function corridorsResponse (data) {
+  return data.map(corridor => ({
     corridorId: corridor.cc,
     name: corridor.nc
   }))
