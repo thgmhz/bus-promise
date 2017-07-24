@@ -72,71 +72,67 @@ function validateHttpStatus (res) {
 }
 
 function handleResponse (res, options) {
-  if (options.terms === '*') return res.data
-
   const data = res.data
   const type = options.type
-  let response
+  const terms = options.terms
 
-  if (type === 'lines') response = linesResponse
-  if (type === 'shapes') response = shapesResponse
-  if (type === 'stops') response = stopsResponse
-  if (type === 'stopsByCorridor') response = stopsResponse
-  if (type === 'stopsByLine') response = stopsResponse
-  if (type === 'corridors') response = corridorsResponse
-  if (type === 'vehiclesPosition') response = vehiclesPositionResponse
-  if (type === 'arrivalForecast') response = arrivalForecastResponse
-  if (type === 'lineForecast') response = lineForecastResponse
-  if (type === 'stopForecast') response = stopForecastResponse
+  const response = {
+    lines: linesResponse,
+    shapes: shapesResponse,
+    stops: stopsResponse,
+    stopsByCorridor: stopsResponse,
+    stopsByLine: stopsResponse,
+    corridors: corridorsResponse,
+    vehiclesPosition: vehiclesPositionResponse,
+    arrivalForecast: arrivalForecastResponse,
+    lineForecast: lineForecastResponse,
+    stopForecast: stopForecastResponse
+  }
 
-  return response(data)
+  if (type === 'lines' && terms === '*') return response[type](data, terms)
+
+  return response[type](data)
 }
 
 function fetchData (options) {
-  const buildPromise = params => {
-    let url = API.sptrans + API[options.type].route
-    let headers = {
-      Cookie: options.auth
-    }
-
-    if (isBrowser && params) {
-      headers = null
-      url = `${API.server}/find`
-      Object.assign(params, {
-        auth: options.auth,
-        type: options.type,
-        route: API[options.type].route
-      })
-    }
-
-    if (options.type === 'shapes') {
-      headers = null
-      url = `${API.server}/shapes/${options.shapeId}`
-    }
-
-    if (options.type === 'lines' && options.terms === '*') {
-      headers = null
-      url = `${API.server}/trips`
-    }
-
-    const config = {
-      method: 'get',
-      url,
-      headers,
-      params
-    }
-
-    return axios(config)
+  let url = API.sptrans + API[options.type].route
+  let headers = {
+    Cookie: options.auth
   }
 
-  if (options.params instanceof Array) {
-    const promises = options.params.map(buildPromise)
-    return Promise.all(promises)
-      .then(responses => responses.map(validateHttpStatus))
-      .then(responses => responses.map(res => handleResponse(res, options)))
+  if (isBrowser) {
+    headers = null
+    url = `${API.server}/find`
+    Object.assign(options.params, {
+      auth: options.auth,
+      type: options.type,
+      route: API[options.type].route
+    })
   }
 
-  return buildPromise(options.params)
+  if (options.type === 'shapes') {
+    headers = null
+    url = `${API.server}/shapes/${options.shapeId}`
+  }
+
+  if (options.type === 'lines' && options.terms === '*') {
+    headers = null
+    url = `${API.server}/trips`
+  }
+
+  if (options.type === 'stops' && options.terms === '*') {
+    headers = null
+    url = `${API.server}/stops`
+  }
+
+  const config = {
+    method: 'get',
+    url,
+    headers,
+    params: options.params
+  }
+
+  return axios(config)
     .then(validateHttpStatus)
     .then(res => handleResponse(res, options))
 }
