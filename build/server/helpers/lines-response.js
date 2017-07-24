@@ -18,7 +18,19 @@ var _constants = require('../constants');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function linesResponse(lines) {
+function linesResponse(lines, terms) {
+  if (terms === '*') {
+    return lines.map(function (line) {
+      return {
+        direction: line.direction_id,
+        shapeId: line.shape_id,
+        mainTerminal: line.trip_headsign,
+        displaySign: line.route_id.split('-')[0],
+        type: line.route_id.split('-')[1]
+      };
+    });
+  }
+
   var buildPromise = function buildPromise(tripId) {
     return (0, _axios2.default)({
       method: 'get',

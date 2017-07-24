@@ -1,7 +1,17 @@
 import axios from 'axios'
 import { API } from '../constants'
 
-export default function linesResponse (lines) {
+export default function linesResponse (lines, terms) {
+  if (terms === '*') {
+    return lines.map(line => ({
+      direction: line.direction_id,
+      shapeId: line.shape_id,
+      mainTerminal: line.trip_headsign,
+      displaySign: line.route_id.split('-')[0],
+      type: line.route_id.split('-')[1]
+    }))
+  }
+
   const buildPromise = tripId =>
     axios({
       method: 'get',

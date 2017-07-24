@@ -89,7 +89,7 @@ function getLines (auth) {
   }).then(console.log)
 }
 ```
-Para obter todas as linhas disponíveis:
+Para obter todas as linhas:
 
 ``` js
 bus.find({
@@ -143,6 +143,15 @@ bus.find({
   auth,
   type: 'stops',
   terms: 'Av. Mutinga'
+}).then(console.log)
+```
+Para obter todas as paradas:
+
+``` js
+bus.find({
+  auth,
+  type: 'stops',
+  terms: '*'
 }).then(console.log)
 ```
 ##### Resposta

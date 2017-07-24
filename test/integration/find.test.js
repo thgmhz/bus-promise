@@ -26,6 +26,25 @@ test('when finding "lines" should return the expected keys and values', async t 
   t.deepEqual(response[0], expected)
 })
 
+test('when finding "lines" with terms equal "*" should return the expected keys and values', async t => {
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
+    auth,
+    type: 'lines',
+    terms: '*'
+  })
+  const expected = {
+    direction: '0',
+    shapeId: '63442',
+    mainTerminal: 'Jd. Monte Belo',
+    displaySign: '1012',
+    type: '10'
+  }
+  t.is(2296, response.length)
+  t.true(response instanceof Array)
+  t.deepEqual(response[0], expected)
+})
+
 test('when finding "shapes" should return the expected keys and values', async t => {
   const auth = await bus.auth(TOKEN)
   const response = await bus.find({
@@ -62,6 +81,17 @@ test('when finding "stops" should return the expected keys and values', async t 
   t.is(2, response.length)
   t.true(response instanceof Array)
   t.deepEqual(response[0], expected)
+})
+
+test('when finding "stops" with terms equal "*" should return the expected keys and values', async t => {
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
+    auth,
+    type: 'stops',
+    terms: '*'
+  })
+  t.is(19880, response.length)
+  t.true(response instanceof Array)
 })
 
 test('when finding "stopsByLine" should return the expected keys and values', async t => {
