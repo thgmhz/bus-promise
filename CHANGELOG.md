@@ -1,3 +1,9 @@
+## 1.1.5 (Jul 23, 2017)
+- **Feature:**
+  - Add find by all stops
+  - update response params when finding by all lines
+([@thiagommedeiros](https://github.com/thiagommedeiros) in [#40](https://github.com/thiagommedeiros/bus-promise/pull/40))
+
 ## 1.1.4 (Jul 22, 2017)
 - **Refactor and Bug-fix:**
   - Refactoring tests to get better assertions
@@ -17,7 +23,7 @@
 ([@thiagommedeiros](https://github.com/thiagommedeiros) in [#37](https://github.com/thiagommedeiros/bus-promise/pull/37))
 
 ## 1.1.1 (Jul 15, 2017)
-- **Build:** This plugin replace process.env.NODE_ENV with "production" because it crashes on browser.
+- **Build:** Add a plugin to replace process.env.NODE_ENV with "production" because it crashes on browser.
 ([@thiagommedeiros](https://github.com/thiagommedeiros) in [#36](https://github.com/thiagommedeiros/bus-promise/pull/36))
 
 ## 1.1.0 (Jul 15, 2017)
@@ -35,7 +41,6 @@
 
 ## 1.0.7 (May 12, 2017)
 - **Bug-fix:** Fixed the bug when a `linha` haven't a `shape_id` ([@thiagommedeiros](https://github.com/thiagommedeiros) in [#19](https://github.com/thiagommedeiros/bus-promise/pull/19))
-
 
 ## 1.0.6 (May 04, 2017)
 - **Feature:** Added a search by all `linhas`. ([@thiagommedeiros](https://github.com/thiagommedeiros) in [#18](https://github.com/thiagommedeiros/bus-promise/pull/18))
