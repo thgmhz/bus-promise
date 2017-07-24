@@ -83,6 +83,17 @@ test('when finding "stops" should return the expected keys and values', async t 
   t.deepEqual(response[0], expected)
 })
 
+test('when finding "stops" with terms equal "*" should return the expected keys and values', async t => {
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
+    auth,
+    type: 'stops',
+    terms: '*'
+  })
+  t.is(19880, response.length)
+  t.true(response instanceof Array)
+})
+
 test('when finding "stopsByLine" should return the expected keys and values', async t => {
   const auth = await bus.auth(TOKEN)
   const response = await bus.find({

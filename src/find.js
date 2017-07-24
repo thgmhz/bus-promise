@@ -90,6 +90,7 @@ function handleResponse (res, options) {
   }
 
   if (type === 'lines' && terms === '*') return response[type](data, terms)
+  if (type === 'stops' && terms === '*') return response[type](data, terms)
 
   return response[type](data)
 }
