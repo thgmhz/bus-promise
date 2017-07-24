@@ -91,75 +91,68 @@ function validateHttpStatus(res) {
 }
 
 function handleResponse(res, options) {
-  if (options.terms === '*') return res.data;
-
   var data = res.data;
   var type = options.type;
-  var response = void 0;
+  var terms = options.terms;
 
-  if (type === 'lines') response = _helpers.linesResponse;
-  if (type === 'shapes') response = _helpers.shapesResponse;
-  if (type === 'stops') response = _helpers.stopsResponse;
-  if (type === 'stopsByCorridor') response = _helpers.stopsResponse;
-  if (type === 'stopsByLine') response = _helpers.stopsResponse;
-  if (type === 'corridors') response = _helpers.corridorsResponse;
-  if (type === 'vehiclesPosition') response = _helpers.vehiclesPositionResponse;
-  if (type === 'arrivalForecast') response = _helpers.arrivalForecastResponse;
-  if (type === 'lineForecast') response = _helpers.lineForecastResponse;
-  if (type === 'stopForecast') response = _helpers.stopForecastResponse;
+  var response = {
+    lines: _helpers.linesResponse,
+    shapes: _helpers.shapesResponse,
+    stops: _helpers.stopsResponse,
+    stopsByCorridor: _helpers.stopsResponse,
+    stopsByLine: _helpers.stopsResponse,
+    corridors: _helpers.corridorsResponse,
+    vehiclesPosition: _helpers.vehiclesPositionResponse,
+    arrivalForecast: _helpers.arrivalForecastResponse,
+    lineForecast: _helpers.lineForecastResponse,
+    stopForecast: _helpers.stopForecastResponse
+  };
 
-  return response(data);
+  if (type === 'lines' && terms === '*') return response[type](data, terms);
+  if (type === 'stops' && terms === '*') return response[type](data, terms);
+
+  return response[type](data);
 }
 
 function fetchData(options) {
-  var buildPromise = function buildPromise(params) {
-    var url = _constants.API.sptrans + _constants.API[options.type].route;
-    var headers = {
-      Cookie: options.auth
-    };
-
-    if (isBrowser && params) {
-      headers = null;
-      url = _constants.API.server + '/find';
-      (0, _assign2.default)(params, {
-        auth: options.auth,
-        type: options.type,
-        route: _constants.API[options.type].route
-      });
-    }
-
-    if (options.type === 'shapes') {
-      headers = null;
-      url = _constants.API.server + '/shapes/' + options.shapeId;
-    }
-
-    if (options.type === 'lines' && options.terms === '*') {
-      headers = null;
-      url = _constants.API.server + '/trips';
-    }
-
-    var config = {
-      method: 'get',
-      url: url,
-      headers: headers,
-      params: params
-    };
-
-    return (0, _axios2.default)(config);
+  var url = _constants.API.sptrans + _constants.API[options.type].route;
+  var headers = {
+    Cookie: options.auth
   };
 
-  if (options.params instanceof Array) {
-    var promises = options.params.map(buildPromise);
-    return _promise2.default.all(promises).then(function (responses) {
-      return responses.map(validateHttpStatus);
-    }).then(function (responses) {
-      return responses.map(function (res) {
-        return handleResponse(res, options);
-      });
+  if (isBrowser) {
+    headers = null;
+    url = _constants.API.server + '/find';
+    (0, _assign2.default)(options.params, {
+      auth: options.auth,
+      type: options.type,
+      route: _constants.API[options.type].route
     });
   }
 
-  return buildPromise(options.params).then(validateHttpStatus).then(function (res) {
+  if (options.type === 'shapes') {
+    headers = null;
+    url = _constants.API.server + '/shapes/' + options.shapeId;
+  }
+
+  if (options.type === 'lines' && options.terms === '*') {
+    headers = null;
+    url = _constants.API.server + '/trips';
+  }
+
+  if (options.type === 'stops' && options.terms === '*') {
+    headers = null;
+    url = _constants.API.server + '/stops';
+  }
+
+  var config = {
+    method: 'get',
+    url: url,
+    headers: headers,
+    params: options.params
+  };
+
+  return (0, _axios2.default)(config).then(validateHttpStatus).then(function (res) {
     return handleResponse(res, options);
   });
 }
