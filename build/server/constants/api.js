@@ -76,5 +76,13 @@ exports.default = {
     proxyParams: {
       stopId: 'codigoParada'
     }
+  },
+  linesDirection: {
+    route: '/linha/buscarLinhaSentido',
+    required: ['terms', 'direction'],
+    proxyParams: {
+      terms: 'termosBusca',
+      direction: 'sentido'
+    }
   }
 };

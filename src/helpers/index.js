@@ -6,6 +6,7 @@ import vehiclesPositionResponse from './vehicles-position-response'
 import arrivalForecastResponse from './arrival-forecast-response'
 import lineForecastResponse from './line-forecast-response'
 import stopForecastResponse from './stop-forecast-response'
+import linesDirectionResponse from './lines-direction-response'
 
 export {
   linesResponse,
@@ -15,5 +16,6 @@ export {
   vehiclesPositionResponse,
   arrivalForecastResponse,
   lineForecastResponse,
-  stopForecastResponse
+  stopForecastResponse,
+  linesDirectionResponse
 }
