@@ -60,6 +60,7 @@ bus.auth('SEU_TOKEN_AQUI')
 Este é o principal método da biblioteca, você deve usá-lo para realizar buscas pelos seguintes tipos de dados:
 
 - [Linhas (lines)](#linhas-lines)
+- [Linhas por sentido (linesByDirection)](#linhas-por-sentido-linesbydirection)
 - [Trajetos (shapes)](#trajetos-shapes)
 - [Paradas (stops)](#paradas-stops)
 - [Paradas por linha (stopsByLine)](#paradas-por-linha-stopsbylines)
@@ -104,6 +105,31 @@ bus.find({
 | ---- | ---- | ---- |
 | `lineId` | *integer* | Código identificador da linha. Este é um código identificador único de cada linha do sistema (por sentido de operação).
 | `shapeId` | *integer* | Código identificador do trajeto. Este código deve ser usado para consultar o trajeto completo do ônibus através do tipo `shapes`.
+| `circular` | *bool* |  Indica se uma linha opera no modo circular (sem um terminal secundário).
+| `displaySign` | *string* | A primeira parte do letreiro numérico da linha.
+| `direction` | *int* | A segunda parte do letreiro numérico da linha, que indica se a linha opera nos modos: *base (10), atendimento (21, 23, 32, 41)*.
+| `type` | *int* | O sentido ao qual a linha atende, onde 1 significa do Terminal Principal (mainDestination) para Terminal Secundário (secondaryDestination) e 2 do Terminal Secundário para Terminal Principal.
+| `mainTerminal` | *string* | O letreiro descritivo da linha no sentido Terminal Principal para Terminal Secundário.
+| `secondaryTerminal` | *string* | O letreiro descritivo da linha no sentido Terminal Secundário para Terminal Principal.
+
+#### Linhas por sentido (linesByDirection)
+O tipo `linesDirection` possibilita a consulta pelas linhas de ônibus filtrando pelo sentido.
+
+Aceita o nome ou letreiro da linha e o sentido da linha
+O valor deve ser passado pelos parâmetros `terms` como `string` e `direction` como `integer` (0 ou 1) respectivamente:
+``` js
+  bus.find({
+    auth,
+    type: 'linesDirection',
+    terms: '8000',
+    direction: 1
+  }).then(console.log)
+```
+##### Resposta
+
+| Atributo | Tipo | Descrição |
+| ---- | ---- | ---- |
+| `lineId` | *integer* | Código identificador da linha. Este é um código identificador único de cada linha do sistema (por sentido de operação).
 | `circular` | *bool* |  Indica se uma linha opera no modo circular (sem um terminal secundário).
 | `displaySign` | *string* | A primeira parte do letreiro numérico da linha.
 | `direction` | *int* | A segunda parte do letreiro numérico da linha, que indica se a linha opera nos modos: *base (10), atendimento (21, 23, 32, 41)*.
