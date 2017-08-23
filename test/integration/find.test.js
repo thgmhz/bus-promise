@@ -21,7 +21,6 @@ test('when finding "lines" should return the expected keys and values', async t 
     mainTerminal: 'TERM. LAPA',
     secondaryTerminal: 'STA. MÔNICA'
   }
-  t.is(4, response.length)
   t.true(response instanceof Array)
   t.deepEqual(response[0], expected)
 })
@@ -40,7 +39,6 @@ test('when finding "lines" with terms equal "*" should return the expected keys 
     displaySign: '1012',
     type: '10'
   }
-  t.is(2296, response.length)
   t.true(response instanceof Array)
   t.deepEqual(response[0], expected)
 })
@@ -59,7 +57,6 @@ test('when finding "shapes" should return the expected keys and values', async t
     sequence: '1',
     traveled: '4.6839013'
   }
-  t.is(375, response.length)
   t.true(response instanceof Array)
   t.deepEqual(response[0], expected)
 })
@@ -78,7 +75,6 @@ test('when finding "stops" should return the expected keys and values', async t 
     lat: -23.555883,
     lng: -46.66306
   }
-  t.is(2, response.length)
   t.true(response instanceof Array)
   t.deepEqual(response[0], expected)
 })
@@ -90,7 +86,6 @@ test('when finding "stops" with terms equal "*" should return the expected keys 
     type: 'stops',
     terms: '*'
   })
-  t.is(19880, response.length)
   t.true(response instanceof Array)
 })
 
@@ -108,7 +103,6 @@ test('when finding "stopsByLine" should return the expected keys and values', as
     lat: -23.534368,
     lng: -46.654267
   }
-  t.is(13, response.length)
   t.true(response instanceof Array)
   t.deepEqual(response[0], expected)
 })
@@ -123,7 +117,6 @@ test('when finding "corridors" should return the expected keys and values', asyn
     corridorId: 8,
     name: 'Campo Limpo'
   }
-  t.is(7, response.length)
   t.true(response instanceof Array)
   t.deepEqual(response[0], expected)
 })
@@ -143,7 +136,6 @@ test('when finding "stopsByCorridor" should return the expected keys and values'
     'lat',
     'lng'
   ]
-  t.is(34, response.length)
   t.true(response instanceof Array)
   t.deepEqual(responseKeys, expectedKeys)
 })
