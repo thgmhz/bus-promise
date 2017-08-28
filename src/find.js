@@ -9,7 +9,8 @@ import {
   arrivalForecastResponse,
   lineForecastResponse,
   stopForecastResponse,
-  linesDirectionResponse
+  linesDirectionResponse,
+  companiesResponse
 } from './helpers'
 
 const isBrowser = typeof window !== 'undefined'
@@ -88,7 +89,8 @@ function handleResponse (res, options) {
     arrivalForecast: arrivalForecastResponse,
     lineForecast: lineForecastResponse,
     stopForecast: stopForecastResponse,
-    linesDirection: linesDirectionResponse
+    linesDirection: linesDirectionResponse,
+    companies: companiesResponse
   }
 
   if (type === 'lines' && terms === '*') return response[type](data, terms)
