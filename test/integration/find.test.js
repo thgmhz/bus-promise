@@ -214,3 +214,25 @@ test('when find "stopForecast" should return the expected keys', async t => {
   t.deepEqual(responseKeys, expectedKeys)
   t.true(response instanceof Object)
 })
+
+test('when finding "lines direction" should return the expected keys and values', async t => {
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
+    auth,
+    type: 'linesDirection',
+    terms: '8000',
+    direction: 1
+  })
+
+  const expected = {
+    circular: false,
+    direction: 1,
+    displaySign: '8000',
+    lineId: 1273,
+    mainTerminal: 'PÇA. RAMOS DE AZEVEDO',
+    secondaryTerminal: 'TERM. LAPA',
+    type: 10,
+  }
+  t.true(response instanceof Array)
+  t.deepEqual(response[0], expected)
+})

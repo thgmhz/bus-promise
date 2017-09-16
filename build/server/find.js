@@ -105,7 +105,8 @@ function handleResponse(res, options) {
     vehiclesPosition: _helpers.vehiclesPositionResponse,
     arrivalForecast: _helpers.arrivalForecastResponse,
     lineForecast: _helpers.lineForecastResponse,
-    stopForecast: _helpers.stopForecastResponse
+    stopForecast: _helpers.stopForecastResponse,
+    linesDirection: _helpers.linesDirectionResponse
   };
 
   if (type === 'lines' && terms === '*') return response[type](data, terms);

@@ -8,7 +8,8 @@ import {
   vehiclesPositionResponse,
   arrivalForecastResponse,
   lineForecastResponse,
-  stopForecastResponse
+  stopForecastResponse,
+  linesDirectionResponse
 } from './helpers'
 
 const isBrowser = typeof window !== 'undefined'
@@ -86,7 +87,8 @@ function handleResponse (res, options) {
     vehiclesPosition: vehiclesPositionResponse,
     arrivalForecast: arrivalForecastResponse,
     lineForecast: lineForecastResponse,
-    stopForecast: stopForecastResponse
+    stopForecast: stopForecastResponse,
+    linesDirection: linesDirectionResponse
   }
 
   if (type === 'lines' && terms === '*') return response[type](data, terms)
