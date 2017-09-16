@@ -116,7 +116,11 @@ bus.find({
 O tipo `linesDirection` possibilita a consulta pelas linhas de ônibus filtrando pelo sentido.
 
 Aceita o nome ou letreiro da linha e o sentido da linha
-O valor deve ser passado pelos parâmetros `terms` como `string` e `direction` como `integer` (0 ou 1) respectivamente:
+O valor deve ser passado pelos parâmetros `terms` como `string` e `direction` como `integer`. Os valores aceitos em `direction` são:
+
+- 1: Terminal Principal para Terminal Secundário
+- 2: Terminal Secundário para Terminal Principal
+
 ``` js
   bus.find({
     auth,
