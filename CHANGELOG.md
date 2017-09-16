@@ -1,3 +1,8 @@
+## 1.1.6 (Sep 16, 2017)
+- **Feature:**
+  - Add find line by direction
+([@drodrigo](https://github.com/thiagommedeiros) in [#42](https://github.com/thiagommedeiros/bus-promise/pull/42))
+
 ## 1.1.5 (Jul 23, 2017)
 - **Feature:**
   - Add find by all stops
