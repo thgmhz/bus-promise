@@ -7,11 +7,13 @@ Adicione uma descrição
 - [ ] Sim. Descreva as funcionalidades que serão afetadas com esta mudança.
 - [ ] Não.
 
-## Checklist
+## Checklist do Desenvolvedor
+
+- [ ] Atualizou o `build` de `browser`
+- [ ] Atualizou o `build` de `server`
+
+## Checklist do Admin
 
 - [ ] Versão atualizada no `package.json`
 - [ ] `CHANGELOG.md` atualizado com as mudanças
-- [ ] Atualizou o `build` de `browser`
-- [ ] Atualizou o `build` de `server`
-- [ ] Aprovado pelo `review`
-- [ ] Pronto para `merge`
+- [ ] `bus-promise` atualizado no NPM
