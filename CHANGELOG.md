@@ -1,3 +1,8 @@
+## 1.1.7 (Sep 17, 2017)
+- **Feature:**
+  - Add find companies method
+([@drodrigo](https://github.com/thiagommedeiros) in [#44](https://github.com/thiagommedeiros/bus-promise/pull/44))
+
 ## 1.1.6 (Sep 16, 2017)
 - **Feature:**
   - Add find line by direction
