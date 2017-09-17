@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.linesDirectionResponse = exports.stopForecastResponse = exports.lineForecastResponse = exports.arrivalForecastResponse = exports.vehiclesPositionResponse = exports.corridorsResponse = exports.stopsResponse = exports.shapesResponse = exports.linesResponse = undefined;
+exports.companiesResponse = exports.linesDirectionResponse = exports.stopForecastResponse = exports.lineForecastResponse = exports.arrivalForecastResponse = exports.vehiclesPositionResponse = exports.corridorsResponse = exports.stopsResponse = exports.shapesResponse = exports.linesResponse = undefined;
 
 var _linesResponse = require('./lines-response');
 
@@ -41,6 +41,10 @@ var _linesDirectionResponse = require('./lines-direction-response');
 
 var _linesDirectionResponse2 = _interopRequireDefault(_linesDirectionResponse);
 
+var _companiesResponse = require('./companies-response');
+
+var _companiesResponse2 = _interopRequireDefault(_companiesResponse);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.linesResponse = _linesResponse2.default;
@@ -52,3 +56,4 @@ exports.arrivalForecastResponse = _arrivalForecastResponse2.default;
 exports.lineForecastResponse = _lineForecastResponse2.default;
 exports.stopForecastResponse = _stopForecastResponse2.default;
 exports.linesDirectionResponse = _linesDirectionResponse2.default;
+exports.companiesResponse = _companiesResponse2.default;
