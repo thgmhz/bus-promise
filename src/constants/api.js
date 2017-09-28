@@ -79,5 +79,8 @@ export default {
       terms: 'termosBusca',
       direction: 'sentido'
     }
+  },
+  companies: {
+    route: '/empresa'
   }
 }

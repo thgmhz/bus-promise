@@ -7,6 +7,7 @@ import arrivalForecastResponse from './arrival-forecast-response'
 import lineForecastResponse from './line-forecast-response'
 import stopForecastResponse from './stop-forecast-response'
 import linesDirectionResponse from './lines-direction-response'
+import companiesResponse from './companies-response'
 
 export {
   linesResponse,
@@ -17,5 +18,6 @@ export {
   arrivalForecastResponse,
   lineForecastResponse,
   stopForecastResponse,
-  linesDirectionResponse
+  linesDirectionResponse,
+  companiesResponse
 }

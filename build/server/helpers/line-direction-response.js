@@ -25,8 +25,4 @@ function linesDirectionResponse(data) {
       secondaryTerminal: line.ts
     };
   });
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 13d8c46... update build files

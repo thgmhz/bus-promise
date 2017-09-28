@@ -70,6 +70,7 @@ Este é o principal método da biblioteca, você deve usá-lo para realizar busc
 - [Previsão de chegada (arrivalForecast)](#previsão-de-chegada-arrivalforecast)
 - [Previsão da linha (lineForecast)](#previsão-da-linha-lineforecast)
 - [Previsão da parada (stopForecast)](#previsão-da-parada-stopforecast)
+- [Empresas](#empresas-companies)
 
 #### Linhas (lines)
 O tipo `lines` possibilita a consulta pelas linhas de ônibus da cidade de São Paulo.
@@ -391,6 +392,27 @@ bus.find({
 | `hour` | *string* | Indica o horário universal (UTC) em que a localização foi capturada. Essa informação está no padrão ISO 8601.
 | `lat` | *string* | Informação de latitude da localização do veículo.
 | `lng` | *string* | Informação de longitude da localização do veículo.
+
+#### Empresas (companies)
+O tipo `companies` possibilita a consulta que retorna a relação das empresas operadoras do transporte público na cidade de São Paulo.
+
+``` js
+  bus.find({
+    auth,
+    type: 'companies',
+  }).then(console.log)
+```
+##### Resposta
+
+| Atributo | Tipo | Descrição |
+| ---- | ---- | ---- |
+| `hour` | *string* | Horário de referência da geração das informações.
+| `companiesByOperationArea` | *array* | Relação de empresas por área de operação.
+| `companiesByOperationArea.operationCode` | *integer* | Código da área de operação.
+| `companiesByOperationArea.companies` | *array* | Relação de empresas.
+| `companiesByOperationArea.companies.operationAreaCode` | *integer* | Código da área de operação.
+| `companiesByOperationArea.companies.referenceCode` | *integer* | Código de referência da empresa.
+| `companiesByOperationArea.companies.name` | *string* | nome da empresa.
 
 ## Como contribuir
 Para contribuir com o projeto, [clique aqui](https://github.com/thiagommedeiros/bus-promise/blob/master/CONTRIBUTING.md).

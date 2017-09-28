@@ -231,8 +231,23 @@ test('when finding "lines direction" should return the expected keys and values'
     lineId: 1273,
     mainTerminal: 'PÇA. RAMOS DE AZEVEDO',
     secondaryTerminal: 'TERM. LAPA',
-    type: 10,
+    type: 10
   }
   t.true(response instanceof Array)
   t.deepEqual(response[0], expected)
+})
+
+test('when find "companies" should return the expected keys', async t => {
+  const auth = await bus.auth(TOKEN)
+  const response = await bus.find({
+    auth,
+    type: 'companies'
+  })
+
+  t.true(response instanceof Object)
+  t.regex(response.hour, /^[0-9]{2}:[0-9]{2}$/g)
+  t.true(response.companies instanceof Array)
+  t.is(response.companies[0].operationAreaCode, 1)
+  t.is(response.companies[0].referenceCode, 37)
+  t.is(response.companies[0].name, 'GATO PRETO')
 })

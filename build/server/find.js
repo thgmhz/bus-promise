@@ -106,7 +106,8 @@ function handleResponse(res, options) {
     arrivalForecast: _helpers.arrivalForecastResponse,
     lineForecast: _helpers.lineForecastResponse,
     stopForecast: _helpers.stopForecastResponse,
-    linesDirection: _helpers.linesDirectionResponse
+    linesDirection: _helpers.linesDirectionResponse,
+    companies: _helpers.companiesResponse
   };
 
   if (type === 'lines' && terms === '*') return response[type](data, terms);
@@ -153,6 +154,7 @@ function fetchData(options) {
     params: options.params
   };
 
+  console.log('config data', config);
   return (0, _axios2.default)(config).then(validateHttpStatus).then(function (res) {
     return handleResponse(res, options);
   });
