@@ -228,10 +228,10 @@ test('when finding "lines direction" should return the expected keys and values'
     circular: false,
     direction: 1,
     displaySign: '8000',
-    lineId: 1273,
+    lineId: 2506,
     mainTerminal: 'PÇA. RAMOS DE AZEVEDO',
     secondaryTerminal: 'TERM. LAPA',
-    type: 10
+    type: 1
   }
   t.true(response instanceof Array)
   t.deepEqual(response[0], expected)
